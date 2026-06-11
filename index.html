@@ -1,0 +1,1696 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Líneas Avanzadas de Algodón — INTA Reconquista</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --verde: #1a5c2e;
+  --verde-med: #2d8a4e;
+  --verde-claro: #4caf73;
+  --verde-pale: #e8f5ec;
+  --rojo: #c0392b;
+  --rojo-pale: #fdecea;
+  --oro: #c9a84c;
+  --gris-oscuro: #1e2329;
+  --gris-med: #4a5568;
+  --gris-claro: #f0f4f0;
+  --blanco: #ffffff;
+  --sombra: 0 4px 24px rgba(0,0,0,0.10);
+  --radio: 14px;
+}
+*, *::before, *::after { box-sizing: border-box; margin:0; padding:0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: #f5f7f5;
+  color: var(--gris-oscuro);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* ── NAVBAR ── */
+nav {
+  position: sticky; top:0; z-index:100;
+  background: var(--verde);
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 24px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+}
+nav img { width:38px; height:38px; border-radius:50%; border:2px solid var(--oro); object-fit:cover; background:#ffffff; padding:3px; }
+nav span { color: var(--blanco); font-weight: 600; font-size:14px; flex:1; }
+nav a {
+  color: rgba(255,255,255,0.85); font-size:12.5px; text-decoration:none;
+  padding: 5px 10px; border-radius:6px; transition: background 0.2s;
+  white-space: nowrap;
+}
+nav a:hover { background: rgba(255,255,255,0.15); color:#fff; }
+.nav-links { display:flex; gap:4px; flex-wrap: wrap; }
+@media(max-width:600px) { .nav-links { display:none; } }
+
+/* ── HERO ── */
+.hero {
+  background: linear-gradient(135deg, #0e3d1f 0%, #1a5c2e 50%, #2d7a45 100%);
+  color: var(--blanco);
+  padding: 72px 24px 64px;
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content:'';
+  position:absolute; inset:0;
+  background: radial-gradient(ellipse at 70% 40%, rgba(201,168,76,0.15) 0%, transparent 60%);
+  pointer-events:none;
+}
+.hero-badge {
+  display: inline-block;
+  background: var(--oro); color: #1e2329;
+  font-size:11px; font-weight:700; letter-spacing:2px;
+  padding: 5px 16px; border-radius:20px;
+  text-transform:uppercase; margin-bottom:20px;
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 6vw, 56px);
+  font-weight: 900; line-height:1.1;
+  margin-bottom: 14px;
+  text-shadow: 0 2px 16px rgba(0,0,0,0.3);
+}
+.hero h1 span { color: var(--oro); }
+.hero p {
+  font-size: clamp(14px, 2.5vw, 18px);
+  opacity:0.88; max-width:620px; margin: 0 auto 32px;
+  font-weight:300;
+}
+.hero-stats {
+  display: flex; gap:24px; justify-content:center; flex-wrap:wrap; margin-top:32px;
+}
+.hero-stat {
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 12px; padding: 18px 28px;
+  min-width:130px;
+}
+.hero-stat .num {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px; font-weight:900; color: var(--oro);
+  display:block; line-height:1;
+}
+.hero-stat .label {
+  font-size:11px; opacity:0.75; margin-top:5px;
+  text-transform:uppercase; letter-spacing:1px;
+}
+
+/* ── SECTION ── */
+section { padding: 56px 20px; max-width: 1100px; margin: 0 auto; }
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(22px, 4vw, 34px);
+  color: var(--verde);
+  margin-bottom: 6px;
+  display: flex; align-items:center; gap:12px;
+}
+.section-title::before {
+  content:''; width:5px; height:36px;
+  background: linear-gradient(180deg, var(--oro), var(--verde-claro));
+  border-radius:3px; flex-shrink:0;
+}
+.section-sub {
+  color: var(--gris-med); font-size:14px; margin-bottom:32px; padding-left:17px;
+}
+.section-divider {
+  width:100%; height:1px;
+  background: linear-gradient(90deg, var(--verde-pale), transparent);
+  margin: 4px 0 32px;
+}
+
+/* ── CARDS ── */
+.card {
+  background: var(--blanco);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  padding: 24px;
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+/* ── CHART BARS ── */
+.chart-wrap { overflow-x: auto; }
+.bar-chart { min-width: 480px; }
+.bar-row {
+  display: grid;
+  grid-template-columns: 100px 1fr 70px;
+  align-items: center; gap:8px;
+  margin-bottom: 8px;
+}
+.bar-label { font-size:12.5px; font-weight:500; text-align:right; color: var(--gris-oscuro); }
+.bar-track { background: #e8ede9; border-radius:6px; height:24px; overflow:hidden; position:relative; }
+.bar-fill {
+  height:100%; border-radius:6px;
+  position:relative; transition: width 1s cubic-bezier(.4,0,.2,1);
+  display:flex; align-items:center;
+}
+.bar-fill::after {
+  content: attr(data-pct);
+  position: absolute; right: 7px;
+  font-size:10px; font-weight:700; color:white;
+  white-space:nowrap;
+}
+.bar-linea { background: linear-gradient(90deg, #2d8a4e, #4caf73); }
+.bar-testigo { background: linear-gradient(90deg, #c0392b, #e05c4c); }
+.bar-ref-line {
+  position:absolute; top:0; bottom:0; width:2px;
+  background: rgba(0,0,0,0.3); z-index:2;
+  pointer-events:none;
+}
+.bar-value { font-size:12px; font-weight:600; color: var(--gris-med); }
+
+.ref-label {
+  font-size:11px; color: var(--gris-med);
+  display:flex; align-items:center; gap:6px; margin-bottom:14px;
+}
+.ref-label::before {
+  content:''; width:24px; height:2px;
+  background: rgba(0,0,0,0.35); border-radius:1px;
+  border-top: 2px dashed rgba(0,0,0,0.35);
+}
+.chart-legend { display:flex; gap:16px; margin-top:12px; flex-wrap:wrap; }
+.legend-item { display:flex; align-items:center; gap:6px; font-size:12px; }
+.legend-dot { width:12px; height:12px; border-radius:3px; }
+
+/* ── GRID LAYOUTS ── */
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+.grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+@media(max-width:768px) {
+  .grid-2 { grid-template-columns:1fr; }
+  .grid-3 { grid-template-columns:1fr; }
+}
+
+/* ── ADVANTAGE CARDS ── */
+.adv-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; margin-top:24px; }
+.adv-card {
+  background: var(--blanco); border-radius:12px;
+  padding:20px; border-left: 5px solid var(--verde-claro);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.adv-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+.adv-card.warn { border-left-color: var(--oro); }
+.adv-icon { font-size:28px; margin-bottom:10px; }
+.adv-title { font-weight:700; font-size:14px; color: var(--verde); margin-bottom:6px; }
+.adv-card.warn .adv-title { color: #a0720a; }
+.adv-body { font-size:13px; color: var(--gris-med); line-height:1.55; }
+
+/* ── PHOTO SECTION ── */
+.photo-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+@media(max-width:600px) { .photo-grid { grid-template-columns:1fr; } }
+.photo-card {
+  border-radius:12px; overflow:hidden;
+  box-shadow: var(--sombra);
+  position:relative;
+}
+.photo-card img { width:100%; display:block; object-fit:cover; height:950px; }
+.photo-caption {
+  position:absolute; bottom:0; left:0; right:0;
+  background: linear-gradient(transparent, rgba(0,0,0,0.75));
+  color:white; padding:20px 14px 14px; font-size:13px; font-weight:500;
+}
+
+/* ── FENOLOGIA TIMELINE ── */
+.fen-table { width:100%; border-collapse:collapse; font-size:13px; }
+.fen-table th {
+  background: var(--verde); color: white;
+  padding: 10px 12px; text-align:left; font-weight:600;
+  font-size:12px; letter-spacing:0.5px;
+}
+.fen-table td { padding: 9px 12px; border-bottom: 1px solid #eef0ee; }
+.fen-table tr:last-child td { border-bottom:none; }
+.fen-table tr.linea-row { background: #f0f9f3; }
+.fen-table tr.testigo-row { background: #fff8f8; }
+.fen-table tr:hover td { background: #e8f5ec; }
+.badge-linea {
+  background: var(--verde-pale); color: var(--verde);
+  font-size:10.5px; font-weight:700; padding:2px 8px; border-radius:10px;
+}
+.badge-test {
+  background: var(--rojo-pale); color: var(--rojo);
+  font-size:10.5px; font-weight:700; padding:2px 8px; border-radius:10px;
+}
+.dias-chip {
+  display:inline-block;
+  background: var(--verde-pale); color: var(--verde-med);
+  font-weight:700; font-size:12px; padding:2px 10px; border-radius:10px;
+}
+.dias-chip.slow {
+  background: var(--rojo-pale); color: var(--rojo);
+}
+
+/* ── STACKED BAR ── */
+.stack-row { display:grid; grid-template-columns:100px 1fr; align-items:center; gap:8px; margin-bottom:7px; }
+.stack-label { font-size:12px; font-weight:500; text-align:right; }
+.stack-track { display:flex; height:22px; border-radius:6px; overflow:hidden; }
+.stack-seg { height:100%; transition: width 0.8s; position:relative; }
+.stack-seg:hover::after {
+  content: attr(data-tip);
+  position:absolute; bottom:28px; left:50%; transform:translateX(-50%);
+  background:#1e2329; color:white; font-size:11px; padding:4px 8px; border-radius:5px;
+  white-space:nowrap; z-index:10;
+}
+
+/* ── HIGHLIGHT BOX ── */
+.highlight-box {
+  background: linear-gradient(135deg, var(--verde-pale), #d4edda);
+  border: 1px solid var(--verde-claro);
+  border-radius:12px; padding:20px 24px; margin:20px 0;
+  display:flex; gap:16px; align-items:flex-start;
+}
+.highlight-icon { font-size:28px; flex-shrink:0; }
+.highlight-text h4 { font-weight:700; color:var(--verde); margin-bottom:4px; }
+.highlight-text p { font-size:13.5px; color:var(--gris-med); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--gris-oscuro); color: rgba(255,255,255,0.7);
+  text-align:center; padding:28px 20px; font-size:13px;
+}
+footer strong { color: var(--oro); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(20px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.fade-up { animation: fadeUp 0.6s ease both; }
+.delay-1 { animation-delay:0.1s; }
+.delay-2 { animation-delay:0.2s; }
+.delay-3 { animation-delay:0.3s; }
+
+/* ── GAP CARDS ── */
+.gap-cards-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 4px;
+}
+@media(max-width:640px) { .gap-cards-row { grid-template-columns:1fr; } }
+
+.gap-card {
+  background: var(--blanco);
+  border-radius: 14px;
+  box-shadow: var(--sombra);
+  padding: 20px 22px;
+  border-top: 5px solid var(--verde-claro);
+  overflow: hidden;
+}
+.gap-card--dp  { border-top-color: #c0392b; }
+.gap-card--med { border-top-color: var(--oro); }
+
+.gap-card__label {
+  font-size: 13px; color: var(--gris-med);
+  margin-bottom: 14px; display:flex; flex-direction:column; gap:2px;
+}
+.gap-card__label strong { color: var(--gris-oscuro); font-size:15px; }
+.gap-card__sub { font-size: 11px; opacity: 0.7; }
+
+.gap-card__body { display:flex; flex-direction:column; gap:10px; }
+
+.gap-card__ref {
+  display: flex; align-items: baseline; gap: 6px;
+  padding: 10px 14px; border-radius: 8px;
+  background: #f5f5f5;
+}
+.gap-card--dp  .gap-card__ref { background: #fdecea; }
+.gap-card--med .gap-card__ref { background: #fef9ec; }
+.gap-card__ref-val  { font-family:'Playfair Display',serif; font-size:22px; font-weight:900; }
+.gap-card--dp  .gap-card__ref-val { color: var(--rojo); }
+.gap-card--med .gap-card__ref-val { color: #a0720a; }
+.gap-card__ref-unit { font-size:12px; color:var(--gris-med); }
+.gap-card__ref-name { font-size:11px; font-weight:600; color:var(--gris-med); margin-left:auto; }
+
+.gap-arrows { display:flex; flex-direction:column; gap:6px; }
+
+.gap-item {
+  display: grid;
+  grid-template-columns: 52px 1fr 80px;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+}
+.gap-item__name { font-weight: 600; color: var(--verde); text-align:right; }
+.gap-item__bar-wrap {
+  height: 22px; background: #eef0ee;
+  border-radius: 6px; overflow: visible;
+  position: relative;
+}
+.gap-item__bar {
+  height: 100%; border-radius: 6px;
+  background: linear-gradient(90deg, #2d8a4e, #5ecf80);
+  transition: width 1s cubic-bezier(.4,0,.2,1);
+  position: relative;
+}
+.gap-item__pill {
+  position: absolute; right: -48px; top: 50%;
+  transform: translateY(-50%);
+  background: var(--verde); color: white;
+  font-size: 10.5px; font-weight: 700;
+  padding: 2px 7px; border-radius: 10px;
+  white-space: nowrap;
+}
+.gap-item__val {
+  font-size: 12px; font-weight: 600; color: var(--gris-med);
+  text-align: right;
+}
+
+/* ── LOLLIPOP CHART ── */
+.lolli-wrap { padding: 8px 0; }
+.lolli-row {
+  display: grid;
+  grid-template-columns: 90px 1fr 72px;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 9px;
+}
+.lolli-label { font-size:12.5px; font-weight:600; text-align:right; }
+.lolli-label.linea { color: var(--verde); }
+.lolli-label.testigo { color: var(--rojo); }
+.lolli-track {
+  position: relative; height: 28px;
+  display: flex; align-items: center;
+}
+.lolli-line {
+  position:absolute; top:50%; height:3px;
+  transform:translateY(-50%);
+  border-radius:2px;
+}
+.lolli-line.linea  { background: linear-gradient(90deg,#c8e6c9,#2d8a4e); }
+.lolli-line.testigo { background: linear-gradient(90deg,#ffcdd2,#c0392b); }
+.lolli-dot {
+  position: absolute; width:14px; height:14px;
+  border-radius:50%; border:3px solid white;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.25);
+  transform: translate(-50%,-50%);
+  top:50%;
+  z-index:2;
+}
+.lolli-dot.linea  { background: #2d8a4e; }
+.lolli-dot.testigo { background: #c0392b; }
+.lolli-ref-med {
+  position:absolute; top:0; bottom:0; width:2px;
+  background: rgba(80,80,80,0.4);
+  border-left: 2px dashed rgba(80,80,80,0.5);
+  z-index:1;
+}
+.lolli-ref-dp {
+  position:absolute; top:0; bottom:0; width:2px;
+  border-left: 2px dotted rgba(192,57,43,0.6);
+  z-index:1;
+}
+.lolli-val { font-size:12px; font-weight:600; color: var(--gris-med); }
+.lolli-section-label {
+  font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase;
+  color: var(--gris-med); margin: 14px 0 6px; padding-left: 98px;
+}
+
+/* ── KPI ROW ── */
+.kpi-row { display:flex; gap:16px; flex-wrap:wrap; margin:24px 0; }
+.kpi {
+  flex:1; min-width:160px;
+  background: var(--blanco); border-radius:12px;
+  padding:16px 20px; box-shadow: var(--sombra);
+  border-top: 4px solid var(--verde-claro);
+}
+.kpi .kpi-num {
+  font-family:'Playfair Display',serif;
+  font-size:28px; font-weight:900; color:var(--verde);
+}
+.kpi .kpi-unit { font-size:13px; color:var(--gris-med); }
+.kpi .kpi-label { font-size:12px; color:var(--gris-med); margin-top:3px; }
+
+/* ── TAB TOGGLE ── */
+.tab-bar { display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
+.tab-btn {
+  padding:8px 18px; border-radius:8px; border:2px solid var(--verde-pale);
+  background:var(--blanco); color:var(--verde-med); cursor:pointer;
+  font-size:13px; font-weight:600; font-family:'DM Sans',sans-serif;
+  transition: all 0.2s;
+}
+.tab-btn.active {
+  background:var(--verde); color:white; border-color:var(--verde);
+}
+.tab-pane { display:none; }
+.tab-pane.active { display:block; }
+/* rto-panel: controlled purely by inline style via JS */
+.rto-panel { }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <svg width="38" height="38" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
+  <circle cx="19" cy="19" r="19" fill="white"/>
+  <image href="img/icon/icon-192x192.png" x="3" y="3" width="32" height="32"/>
+</svg>
+  <span>INTA Reconquista · Mejoramiento de Algodón</span>
+  <div class="nav-links">
+    <a href="#rendimiento">Rendimiento</a>
+    <a href="#componentes">Componentes</a>
+    <a href="#calidad">Calidad</a>
+    <a href="#fenologia">Fenología</a>
+    <a href="#biomasa">Biomasa</a>
+    <a href="#ventajas">Ventajas</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero fade-up">
+  <div class="hero-badge">INTA Reconquista · 3 Campañas 2023/24 – 2025/26</div>
+  <h1>Líneas Avanzadas<br><span>de Algodón</span></h1>
+  <p>7 genotipos de estructura compacta con rendimiento y calidad superiores, diseñados para la producción eficiente en el Norte de Santa Fe</p>
+  <div class="hero-stats">
+    <div class="hero-stat fade-up delay-1">
+      <span class="num">7</span>
+      <div class="label">Líneas avanzadas</div>
+    </div>
+    <div class="hero-stat fade-up delay-2">
+      <span class="num">3</span>
+      <div class="label">Campañas evaluadas</div>
+    </div>
+    <div class="hero-stat fade-up delay-3">
+      <span class="num">+10%</span>
+      <div class="label">Rto fibra vs testigos</div>
+    </div>
+    <div class="hero-stat fade-up delay-3">
+      <span class="num">~80%</span>
+      <div class="label">Biomasa reproductiva</div>
+    </div>
+  </div>
+</div>
+
+<!-- RENDIMIENTO -->
+<section id="rendimiento">
+  <h2 class="section-title">Rendimiento — Promedio 3 Campañas</h2>
+  <p class="section-sub">Comparativo vs. testigos comerciales · INTA Reconquista · 2023/24 – 2025/26</p>
+  <div class="section-divider"></div>
+
+  <!-- TAB TOGGLE -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="showRtoTab('bruto', this)">Rendimiento Bruto</button>
+    <button class="tab-btn" onclick="showRtoTab('fibra', this)">Rendimiento Fibra</button>
+  </div>
+
+  <!-- BRUTO -->
+  <div id="rto-panel-bruto" class="rto-panel">
+
+    <!-- GAP CARDS -->
+    <div class="gap-cards-row">
+      <div class="gap-card gap-card--dp">
+        <div class="gap-card__label">vs. <strong>DP 1238</strong><span class="gap-card__sub">variedad más usada en la zona</span></div>
+        <div class="gap-card__body">
+          <div class="gap-card__ref"><span class="gap-card__ref-val">1.527</span><span class="gap-card__ref-unit">Kg/ha</span><span class="gap-card__ref-name">DP 1238</span></div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="320" height="217" viewBox="0 0 320 217" font-family="'DM Sans',sans-serif">
+<rect width="320" height="217" fill="transparent"/>
+<text x="46" y="23" font-size="12" font-weight="700" fill="#c0392b" text-anchor="end">G53</text>
+<rect x="52" y="8" width="208" height="22" fill="#eef0ee" rx="6"/>
+<rect x="52" y="8" width="180.9" height="22" fill="#c0392b" rx="6" opacity="0.82"/>
+<text x="237.9" y="23" font-size="11" font-weight="700" fill="#c0392b">+392 Kg/ha</text>
+<text x="46" y="52" font-size="12" font-weight="700" fill="#c0392b" text-anchor="end">G17</text>
+<rect x="52" y="37" width="208" height="22" fill="#eef0ee" rx="6"/>
+<rect x="52" y="37" width="112.6" height="22" fill="#c0392b" rx="6" opacity="0.82"/>
+<text x="169.6" y="52" font-size="11" font-weight="700" fill="#c0392b">+244 Kg/ha</text>
+<text x="46" y="81" font-size="12" font-weight="700" fill="#c0392b" text-anchor="end">G16</text>
+<rect x="52" y="66" width="208" height="22" fill="#eef0ee" rx="6"/>
+<rect x="52" y="66" width="108.9" height="22" fill="#c0392b" rx="6" opacity="0.82"/>
+<text x="165.9" y="81" font-size="11" font-weight="700" fill="#c0392b">+236 Kg/ha</text>
+<text x="46" y="110" font-size="12" font-weight="700" fill="#c0392b" text-anchor="end">G27</text>
+<rect x="52" y="95" width="208" height="22" fill="#eef0ee" rx="6"/>
+<rect x="52" y="95" width="104.3" height="22" fill="#c0392b" rx="6" opacity="0.82"/>
+<text x="161.3" y="110" font-size="11" font-weight="700" fill="#c0392b">+226 Kg/ha</text>
+<text x="46" y="139" font-size="12" font-weight="700" fill="#c0392b" text-anchor="end">G50</text>
+<rect x="52" y="124" width="208" height="22" fill="#eef0ee" rx="6"/>
+<rect x="52" y="124" width="75.2" height="22" fill="#c0392b" rx="6" opacity="0.82"/>
+<text x="132.2" y="139" font-size="11" font-weight="700" fill="#c0392b">+163 Kg/ha</text>
+<text x="46" y="168" font-size="12" font-weight="700" fill="#c0392b" text-anchor="end">G20</text>
+<rect x="52" y="153" width="208" height="22" fill="#eef0ee" rx="6"/>
+<rect x="52" y="153" width="56.8" height="22" fill="#c0392b" rx="6" opacity="0.82"/>
+<text x="113.8" y="168" font-size="11" font-weight="700" fill="#c0392b">+123 Kg/ha</text>
+<text x="46" y="197" font-size="12" font-weight="700" fill="#c0392b" text-anchor="end">G70</text>
+<rect x="52" y="182" width="208" height="22" fill="#eef0ee" rx="6"/>
+<rect x="52" y="182" width="44.8" height="22" fill="#c0392b" rx="6" opacity="0.82"/>
+<text x="101.8" y="197" font-size="11" font-weight="700" fill="#c0392b">+97 Kg/ha</text>
+</svg>
+        </div>
+      </div>
+      <div class="gap-card gap-card--med">
+        <div class="gap-card__label">vs. <strong>Media testigos</strong><span class="gap-card__sub">promedio 4 variedades comerciales</span></div>
+        <div class="gap-card__body">
+          <div class="gap-card__ref"><span class="gap-card__ref-val">1.657</span><span class="gap-card__ref-unit">Kg/ha</span><span class="gap-card__ref-name">Media testigos</span></div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="320" height="217" viewBox="0 0 320 217" font-family="'DM Sans',sans-serif">
+<rect width="320" height="217" fill="transparent"/>
+<text x="46" y="23" font-size="12" font-weight="700" fill="#a0720a" text-anchor="end">G53</text>
+<rect x="52" y="8" width="208" height="22" fill="#eef0ee" rx="6"/>
+<rect x="52" y="8" width="180.9" height="22" fill="#a0720a" rx="6" opacity="0.82"/>
+<text x="237.9" y="23" font-size="11" font-weight="700" fill="#a0720a">+262 Kg/ha</text>
+<text x="46" y="52" font-size="12" font-weight="700" fill="#a0720a" text-anchor="end">G17</text>
+<rect x="52" y="37" width="208" height="22" fill="#eef0ee" rx="6"/>
+<rect x="52" y="37" width="78.7" height="22" fill="#a0720a" rx="6" opacity="0.82"/>
+<text x="135.7" y="52" font-size="11" font-weight="700" fill="#a0720a">+114 Kg/ha</text>
+<text x="46" y="81" font-size="12" font-weight="700" fill="#a0720a" text-anchor="end">G16</text>
+<rect x="52" y="66" width="208" height="22" fill="#eef0ee" rx="6"/>
+<rect x="52" y="66" width="73.2" height="22" fill="#a0720a" rx="6" opacity="0.82"/>
+<text x="130.2" y="81" font-size="11" font-weight="700" fill="#a0720a">+106 Kg/ha</text>
+<text x="46" y="110" font-size="12" font-weight="700" fill="#a0720a" text-anchor="end">G27</text>
+<rect x="52" y="95" width="208" height="22" fill="#eef0ee" rx="6"/>
+<rect x="52" y="95" width="66.3" height="22" fill="#a0720a" rx="6" opacity="0.82"/>
+<text x="123.3" y="110" font-size="11" font-weight="700" fill="#a0720a">+96 Kg/ha</text>
+<text x="46" y="139" font-size="12" font-weight="700" fill="#a0720a" text-anchor="end">G50</text>
+<rect x="52" y="124" width="208" height="22" fill="#eef0ee" rx="6"/>
+<rect x="52" y="124" width="22.8" height="22" fill="#a0720a" rx="6" opacity="0.82"/>
+<text x="79.8" y="139" font-size="11" font-weight="700" fill="#a0720a">+33 Kg/ha</text>
+<text x="46" y="168" font-size="12" font-weight="700" fill="#a0720a" text-anchor="end">G20</text>
+<rect x="52" y="153" width="208" height="22" fill="#eef0ee" rx="6"/>
+<rect x="52" y="153" width="2.0" height="22" fill="#a0720a" rx="6" opacity="0.82"/>
+<text x="59.0" y="168" font-size="11" font-weight="700" fill="#a0720a">+-7 Kg/ha</text>
+<text x="46" y="197" font-size="12" font-weight="700" fill="#a0720a" text-anchor="end">G70</text>
+<rect x="52" y="182" width="208" height="22" fill="#eef0ee" rx="6"/>
+<rect x="52" y="182" width="2.0" height="22" fill="#a0720a" rx="6" opacity="0.82"/>
+<text x="59.0" y="197" font-size="11" font-weight="700" fill="#a0720a">+-33 Kg/ha</text>
+</svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- LOLLIPOP CHART -->
+    <div class="card" style="margin-top:20px;">
+      <div style="font-size:12px;color:var(--gris-med);margin-bottom:16px;display:flex;gap:20px;flex-wrap:wrap;align-items:center;">
+        <span style="display:flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:#2d8a4e;display:inline-block;"></span>Línea avanzada</span>
+        <span style="display:flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:#c0392b;display:inline-block;"></span>Testigo comercial</span>
+        <span style="display:flex;align-items:center;gap:6px;"><span style="width:24px;height:2px;border-top:2px dashed #888;display:inline-block;"></span>Media testigos (1.657 Kg/ha)</span>
+        <span style="display:flex;align-items:center;gap:6px;"><span style="width:24px;height:2px;border-top:2px dotted #c0392b;display:inline-block;"></span>DP 1238 (1.527 Kg/ha)</span>
+      </div>
+      <div style="overflow-x:auto;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="700" height="486" viewBox="0 0 700 486" font-family="'DM Sans',sans-serif">
+<rect width="700" height="486" fill="#fff" rx="10"/>
+<line x1="292.8" y1="12" x2="292.8" y2="454" stroke="#888" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.55"/>
+<line x1="137.6" y1="12" x2="137.6" y2="454" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="3,3" opacity="0.45"/>
+<text x="92" y="29" font-size="10.5" font-weight="700" fill="#2d8a4e" letter-spacing="1.2" opacity="0.8">▸ LÍNEAS AVANZADAS</text>
+<rect x="92" y="38" width="532" height="30" fill="#e8f5ec" rx="4" opacity="0.45"/>
+<text x="85" y="57" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G53</text>
+<line x1="137.6" y1="53.0" x2="605.7" y2="53.0" stroke="#4caf73" stroke-width="3" stroke-linecap="round" opacity="0.65"/>
+<circle cx="605.7" cy="53.0" r="7" fill="#2d8a4e" stroke="white" stroke-width="2.5"/>
+<text x="630" y="57" font-size="12" font-weight="600" fill="#4a5568">1919</text>
+<rect x="618.7" y="44" width="42" height="17" fill="#2d8a4e" rx="9" opacity="0.9"/>
+<text x="639.7" y="57" font-size="10" font-weight="700" fill="white" text-anchor="middle">+392</text>
+<rect x="92" y="68" width="532" height="30" fill="#e8f5ec" rx="4" opacity="0.45"/>
+<text x="85" y="87" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G17</text>
+<line x1="137.6" y1="83.0" x2="428.9" y2="83.0" stroke="#4caf73" stroke-width="3" stroke-linecap="round" opacity="0.65"/>
+<circle cx="428.9" cy="83.0" r="7" fill="#2d8a4e" stroke="white" stroke-width="2.5"/>
+<text x="630" y="87" font-size="12" font-weight="600" fill="#4a5568">1771</text>
+<rect x="441.9" y="74" width="42" height="17" fill="#2d8a4e" rx="9" opacity="0.9"/>
+<text x="462.9" y="87" font-size="10" font-weight="700" fill="white" text-anchor="middle">+244</text>
+<rect x="92" y="98" width="532" height="30" fill="#e8f5ec" rx="4" opacity="0.45"/>
+<text x="85" y="117" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G16</text>
+<line x1="137.6" y1="113.0" x2="419.4" y2="113.0" stroke="#4caf73" stroke-width="3" stroke-linecap="round" opacity="0.65"/>
+<circle cx="419.4" cy="113.0" r="7" fill="#2d8a4e" stroke="white" stroke-width="2.5"/>
+<text x="630" y="117" font-size="12" font-weight="600" fill="#4a5568">1763</text>
+<rect x="432.4" y="104" width="42" height="17" fill="#2d8a4e" rx="9" opacity="0.9"/>
+<text x="453.4" y="117" font-size="10" font-weight="700" fill="white" text-anchor="middle">+236</text>
+<rect x="92" y="128" width="532" height="30" fill="#e8f5ec" rx="4" opacity="0.45"/>
+<text x="85" y="147" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G27</text>
+<line x1="137.6" y1="143.0" x2="407.4" y2="143.0" stroke="#4caf73" stroke-width="3" stroke-linecap="round" opacity="0.65"/>
+<circle cx="407.4" cy="143.0" r="7" fill="#2d8a4e" stroke="white" stroke-width="2.5"/>
+<text x="630" y="147" font-size="12" font-weight="600" fill="#4a5568">1753</text>
+<rect x="420.4" y="134" width="42" height="17" fill="#2d8a4e" rx="9" opacity="0.9"/>
+<text x="441.4" y="147" font-size="10" font-weight="700" fill="white" text-anchor="middle">+226</text>
+<rect x="92" y="158" width="532" height="30" fill="#e8f5ec" rx="4" opacity="0.45"/>
+<text x="85" y="177" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G50</text>
+<line x1="137.6" y1="173.0" x2="332.2" y2="173.0" stroke="#4caf73" stroke-width="3" stroke-linecap="round" opacity="0.65"/>
+<circle cx="332.2" cy="173.0" r="7" fill="#2d8a4e" stroke="white" stroke-width="2.5"/>
+<text x="630" y="177" font-size="12" font-weight="600" fill="#4a5568">1690</text>
+<rect x="345.2" y="164" width="42" height="17" fill="#2d8a4e" rx="9" opacity="0.9"/>
+<text x="366.2" y="177" font-size="10" font-weight="700" fill="white" text-anchor="middle">+163</text>
+<rect x="92" y="188" width="532" height="30" fill="#e8f5ec" rx="4" opacity="0.45"/>
+<text x="85" y="207" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G20</text>
+<line x1="137.6" y1="203.0" x2="284.5" y2="203.0" stroke="#4caf73" stroke-width="3" stroke-linecap="round" opacity="0.65"/>
+<circle cx="284.5" cy="203.0" r="7" fill="#2d8a4e" stroke="white" stroke-width="2.5"/>
+<text x="630" y="207" font-size="12" font-weight="600" fill="#4a5568">1650</text>
+<rect x="297.5" y="194" width="42" height="17" fill="#2d8a4e" rx="9" opacity="0.9"/>
+<text x="318.5" y="207" font-size="10" font-weight="700" fill="white" text-anchor="middle">+123</text>
+<rect x="92" y="218" width="532" height="30" fill="#e8f5ec" rx="4" opacity="0.45"/>
+<text x="85" y="237" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G70</text>
+<line x1="137.6" y1="233.0" x2="253.4" y2="233.0" stroke="#4caf73" stroke-width="3" stroke-linecap="round" opacity="0.65"/>
+<circle cx="253.4" cy="233.0" r="7" fill="#2d8a4e" stroke="white" stroke-width="2.5"/>
+<text x="630" y="237" font-size="12" font-weight="600" fill="#4a5568">1624</text>
+<rect x="266.4" y="224" width="42" height="17" fill="#2d8a4e" rx="9" opacity="0.9"/>
+<text x="287.4" y="237" font-size="10" font-weight="700" fill="white" text-anchor="middle">+97</text>
+<text x="92" y="271" font-size="10.5" font-weight="700" fill="#c0392b" letter-spacing="1.2" opacity="0.8">▸ TESTIGOS COMERCIALES</text>
+<rect x="92" y="280" width="532" height="30" fill="#fdecea" rx="4" opacity="0.45"/>
+<text x="85" y="299" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">Porá_3</text>
+<line x1="137.6" y1="295.0" x2="475.5" y2="295.0" stroke="#e07070" stroke-width="3" stroke-linecap="round" opacity="0.65"/>
+<circle cx="475.5" cy="295.0" r="7" fill="#c0392b" stroke="white" stroke-width="2.5"/>
+<text x="630" y="299" font-size="12" font-weight="600" fill="#4a5568">1810</text>
+<rect x="92" y="310" width="532" height="30" fill="#fdecea" rx="4" opacity="0.45"/>
+<text x="85" y="329" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">NuOpal</text>
+<line x1="137.6" y1="325.0" x2="384.8" y2="325.0" stroke="#e07070" stroke-width="3" stroke-linecap="round" opacity="0.65"/>
+<circle cx="384.8" cy="325.0" r="7" fill="#c0392b" stroke="white" stroke-width="2.5"/>
+<text x="630" y="329" font-size="12" font-weight="600" fill="#4a5568">1734</text>
+<rect x="92" y="340" width="532" height="30" fill="#fdecea" rx="4" opacity="0.45"/>
+<text x="85" y="359" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">Guaz_4</text>
+<line x1="137.6" y1="355.0" x2="174.6" y2="355.0" stroke="#e07070" stroke-width="3" stroke-linecap="round" opacity="0.65"/>
+<circle cx="174.6" cy="355.0" r="7" fill="#c0392b" stroke="white" stroke-width="2.5"/>
+<text x="630" y="359" font-size="12" font-weight="600" fill="#4a5568">1558</text>
+<rect x="92" y="370" width="532" height="30" fill="#fdecea" rx="4" opacity="0.45"/>
+<text x="85" y="389" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">DP_1238</text>
+<line x1="137.6" y1="385.0" x2="137.6" y2="385.0" stroke="#e07070" stroke-width="3" stroke-linecap="round" opacity="0.65"/>
+<circle cx="137.6" cy="385.0" r="7" fill="#c0392b" stroke="white" stroke-width="2.5"/>
+<text x="630" y="389" font-size="12" font-weight="600" fill="#4a5568">1527</text>
+<text x="137.6" y="478" font-size="10" fill="#c0392b" text-anchor="middle" opacity="0.75">DP 1238 (1527)</text>
+<text x="292.8" y="478" font-size="10" fill="#666" text-anchor="middle" opacity="0.75">Media test. (1657)</text>
+</svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- FIBRA -->
+  <div id="rto-panel-fibra" class="rto-panel" style="display:none;">
+
+    <div class="gap-cards-row">
+      <div class="gap-card gap-card--dp">
+        <div class="gap-card__label">vs. <strong>DP 1238</strong><span class="gap-card__sub">variedad más usada en la zona</span></div>
+        <div class="gap-card__body">
+          <div class="gap-card__ref"><span class="gap-card__ref-val">572</span><span class="gap-card__ref-unit">Kg/ha</span><span class="gap-card__ref-name">DP 1238</span></div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="320" height="217" viewBox="0 0 320 217" font-family="'DM Sans',sans-serif">
+<rect width="320" height="217" fill="transparent"/>
+<text x="46" y="23" font-size="12" font-weight="700" fill="#c0392b" text-anchor="end">G53</text>
+<rect x="52" y="8" width="208" height="22" fill="#eef0ee" rx="6"/>
+<rect x="52" y="8" width="180.9" height="22" fill="#c0392b" rx="6" opacity="0.82"/>
+<text x="237.9" y="23" font-size="11" font-weight="700" fill="#c0392b">+160 Kg/ha</text>
+<text x="46" y="52" font-size="12" font-weight="700" fill="#c0392b" text-anchor="end">G17</text>
+<rect x="52" y="37" width="208" height="22" fill="#eef0ee" rx="6"/>
+<rect x="52" y="37" width="145.8" height="22" fill="#c0392b" rx="6" opacity="0.82"/>
+<text x="202.8" y="52" font-size="11" font-weight="700" fill="#c0392b">+129 Kg/ha</text>
+<text x="46" y="81" font-size="12" font-weight="700" fill="#c0392b" text-anchor="end">G16</text>
+<rect x="52" y="66" width="208" height="22" fill="#eef0ee" rx="6"/>
+<rect x="52" y="66" width="127.7" height="22" fill="#c0392b" rx="6" opacity="0.82"/>
+<text x="184.7" y="81" font-size="11" font-weight="700" fill="#c0392b">+113 Kg/ha</text>
+<text x="46" y="110" font-size="12" font-weight="700" fill="#c0392b" text-anchor="end">G27</text>
+<rect x="52" y="95" width="208" height="22" fill="#eef0ee" rx="6"/>
+<rect x="52" y="95" width="124.3" height="22" fill="#c0392b" rx="6" opacity="0.82"/>
+<text x="181.3" y="110" font-size="11" font-weight="700" fill="#c0392b">+110 Kg/ha</text>
+<text x="46" y="139" font-size="12" font-weight="700" fill="#c0392b" text-anchor="end">G50</text>
+<rect x="52" y="124" width="208" height="22" fill="#eef0ee" rx="6"/>
+<rect x="52" y="124" width="88.2" height="22" fill="#c0392b" rx="6" opacity="0.82"/>
+<text x="145.2" y="139" font-size="11" font-weight="700" fill="#c0392b">+78 Kg/ha</text>
+<text x="46" y="168" font-size="12" font-weight="700" fill="#c0392b" text-anchor="end">G20</text>
+<rect x="52" y="153" width="208" height="22" fill="#eef0ee" rx="6"/>
+<rect x="52" y="153" width="83.7" height="22" fill="#c0392b" rx="6" opacity="0.82"/>
+<text x="140.7" y="168" font-size="11" font-weight="700" fill="#c0392b">+74 Kg/ha</text>
+<text x="46" y="197" font-size="12" font-weight="700" fill="#c0392b" text-anchor="end">G70</text>
+<rect x="52" y="182" width="208" height="22" fill="#eef0ee" rx="6"/>
+<rect x="52" y="182" width="80.3" height="22" fill="#c0392b" rx="6" opacity="0.82"/>
+<text x="137.3" y="197" font-size="11" font-weight="700" fill="#c0392b">+71 Kg/ha</text>
+</svg>
+        </div>
+      </div>
+      <div class="gap-card gap-card--med">
+        <div class="gap-card__label">vs. <strong>Media testigos</strong><span class="gap-card__sub">promedio 4 variedades comerciales</span></div>
+        <div class="gap-card__body">
+          <div class="gap-card__ref"><span class="gap-card__ref-val">628</span><span class="gap-card__ref-unit">Kg/ha</span><span class="gap-card__ref-name">Media testigos</span></div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="320" height="217" viewBox="0 0 320 217" font-family="'DM Sans',sans-serif">
+<rect width="320" height="217" fill="transparent"/>
+<text x="46" y="23" font-size="12" font-weight="700" fill="#a0720a" text-anchor="end">G53</text>
+<rect x="52" y="8" width="208" height="22" fill="#eef0ee" rx="6"/>
+<rect x="52" y="8" width="180.9" height="22" fill="#a0720a" rx="6" opacity="0.82"/>
+<text x="237.9" y="23" font-size="11" font-weight="700" fill="#a0720a">+104 Kg/ha</text>
+<text x="46" y="52" font-size="12" font-weight="700" fill="#a0720a" text-anchor="end">G17</text>
+<rect x="52" y="37" width="208" height="22" fill="#eef0ee" rx="6"/>
+<rect x="52" y="37" width="127.0" height="22" fill="#a0720a" rx="6" opacity="0.82"/>
+<text x="184.0" y="52" font-size="11" font-weight="700" fill="#a0720a">+73 Kg/ha</text>
+<text x="46" y="81" font-size="12" font-weight="700" fill="#a0720a" text-anchor="end">G16</text>
+<rect x="52" y="66" width="208" height="22" fill="#eef0ee" rx="6"/>
+<rect x="52" y="66" width="99.1" height="22" fill="#a0720a" rx="6" opacity="0.82"/>
+<text x="156.1" y="81" font-size="11" font-weight="700" fill="#a0720a">+57 Kg/ha</text>
+<text x="46" y="110" font-size="12" font-weight="700" fill="#a0720a" text-anchor="end">G27</text>
+<rect x="52" y="95" width="208" height="22" fill="#eef0ee" rx="6"/>
+<rect x="52" y="95" width="93.9" height="22" fill="#a0720a" rx="6" opacity="0.82"/>
+<text x="150.9" y="110" font-size="11" font-weight="700" fill="#a0720a">+54 Kg/ha</text>
+<text x="46" y="139" font-size="12" font-weight="700" fill="#a0720a" text-anchor="end">G50</text>
+<rect x="52" y="124" width="208" height="22" fill="#eef0ee" rx="6"/>
+<rect x="52" y="124" width="38.3" height="22" fill="#a0720a" rx="6" opacity="0.82"/>
+<text x="95.3" y="139" font-size="11" font-weight="700" fill="#a0720a">+22 Kg/ha</text>
+<text x="46" y="168" font-size="12" font-weight="700" fill="#a0720a" text-anchor="end">G20</text>
+<rect x="52" y="153" width="208" height="22" fill="#eef0ee" rx="6"/>
+<rect x="52" y="153" width="31.3" height="22" fill="#a0720a" rx="6" opacity="0.82"/>
+<text x="88.3" y="168" font-size="11" font-weight="700" fill="#a0720a">+18 Kg/ha</text>
+<text x="46" y="197" font-size="12" font-weight="700" fill="#a0720a" text-anchor="end">G70</text>
+<rect x="52" y="182" width="208" height="22" fill="#eef0ee" rx="6"/>
+<rect x="52" y="182" width="26.1" height="22" fill="#a0720a" rx="6" opacity="0.82"/>
+<text x="83.1" y="197" font-size="11" font-weight="700" fill="#a0720a">+15 Kg/ha</text>
+</svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:20px;">
+      <div style="font-size:12px;color:var(--gris-med);margin-bottom:16px;display:flex;gap:20px;flex-wrap:wrap;align-items:center;">
+        <span style="display:flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:#2d8a4e;display:inline-block;"></span>Línea avanzada</span>
+        <span style="display:flex;align-items:center;gap:6px;"><span style="width:14px;height:14px;border-radius:3px;background:#c0392b;display:inline-block;"></span>Testigo comercial</span>
+        <span style="display:flex;align-items:center;gap:6px;"><span style="width:24px;height:2px;border-top:2px dashed #888;display:inline-block;"></span>Media testigos (628 Kg/ha)</span>
+        <span style="display:flex;align-items:center;gap:6px;"><span style="width:24px;height:2px;border-top:2px dotted #c0392b;display:inline-block;"></span>DP 1238 (572 Kg/ha)</span>
+      </div>
+      <div style="overflow-x:auto;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="700" height="486" viewBox="0 0 700 486" font-family="'DM Sans',sans-serif">
+<rect width="700" height="486" fill="#fff" rx="10"/>
+<line x1="299.6" y1="12" x2="299.6" y2="454" stroke="#888" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.55"/>
+<line x1="134.2" y1="12" x2="134.2" y2="454" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="3,3" opacity="0.45"/>
+<text x="92" y="29" font-size="10.5" font-weight="700" fill="#2d8a4e" letter-spacing="1.2" opacity="0.8">▸ LÍNEAS AVANZADAS</text>
+<rect x="92" y="38" width="532" height="30" fill="#e8f5ec" rx="4" opacity="0.45"/>
+<text x="85" y="57" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G53</text>
+<line x1="134.2" y1="53.0" x2="606.7" y2="53.0" stroke="#4caf73" stroke-width="3" stroke-linecap="round" opacity="0.65"/>
+<circle cx="606.7" cy="53.0" r="7" fill="#2d8a4e" stroke="white" stroke-width="2.5"/>
+<text x="630" y="57" font-size="12" font-weight="600" fill="#4a5568">732</text>
+<rect x="619.7" y="44" width="42" height="17" fill="#2d8a4e" rx="9" opacity="0.9"/>
+<text x="640.7" y="57" font-size="10" font-weight="700" fill="white" text-anchor="middle">+160</text>
+<rect x="92" y="68" width="532" height="30" fill="#e8f5ec" rx="4" opacity="0.45"/>
+<text x="85" y="87" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G17</text>
+<line x1="134.2" y1="83.0" x2="515.2" y2="83.0" stroke="#4caf73" stroke-width="3" stroke-linecap="round" opacity="0.65"/>
+<circle cx="515.2" cy="83.0" r="7" fill="#2d8a4e" stroke="white" stroke-width="2.5"/>
+<text x="630" y="87" font-size="12" font-weight="600" fill="#4a5568">701</text>
+<rect x="528.2" y="74" width="42" height="17" fill="#2d8a4e" rx="9" opacity="0.9"/>
+<text x="549.2" y="87" font-size="10" font-weight="700" fill="white" text-anchor="middle">+129</text>
+<rect x="92" y="98" width="532" height="30" fill="#e8f5ec" rx="4" opacity="0.45"/>
+<text x="85" y="117" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G16</text>
+<line x1="134.2" y1="113.0" x2="467.9" y2="113.0" stroke="#4caf73" stroke-width="3" stroke-linecap="round" opacity="0.65"/>
+<circle cx="467.9" cy="113.0" r="7" fill="#2d8a4e" stroke="white" stroke-width="2.5"/>
+<text x="630" y="117" font-size="12" font-weight="600" fill="#4a5568">685</text>
+<rect x="480.9" y="104" width="42" height="17" fill="#2d8a4e" rx="9" opacity="0.9"/>
+<text x="501.9" y="117" font-size="10" font-weight="700" fill="white" text-anchor="middle">+113</text>
+<rect x="92" y="128" width="532" height="30" fill="#e8f5ec" rx="4" opacity="0.45"/>
+<text x="85" y="147" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G27</text>
+<line x1="134.2" y1="143.0" x2="459.1" y2="143.0" stroke="#4caf73" stroke-width="3" stroke-linecap="round" opacity="0.65"/>
+<circle cx="459.1" cy="143.0" r="7" fill="#2d8a4e" stroke="white" stroke-width="2.5"/>
+<text x="630" y="147" font-size="12" font-weight="600" fill="#4a5568">682</text>
+<rect x="472.1" y="134" width="42" height="17" fill="#2d8a4e" rx="9" opacity="0.9"/>
+<text x="493.1" y="147" font-size="10" font-weight="700" fill="white" text-anchor="middle">+110</text>
+<rect x="92" y="158" width="532" height="30" fill="#e8f5ec" rx="4" opacity="0.45"/>
+<text x="85" y="177" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G50</text>
+<line x1="134.2" y1="173.0" x2="364.6" y2="173.0" stroke="#4caf73" stroke-width="3" stroke-linecap="round" opacity="0.65"/>
+<circle cx="364.6" cy="173.0" r="7" fill="#2d8a4e" stroke="white" stroke-width="2.5"/>
+<text x="630" y="177" font-size="12" font-weight="600" fill="#4a5568">650</text>
+<rect x="377.6" y="164" width="42" height="17" fill="#2d8a4e" rx="9" opacity="0.9"/>
+<text x="398.6" y="177" font-size="10" font-weight="700" fill="white" text-anchor="middle">+78</text>
+<rect x="92" y="188" width="532" height="30" fill="#e8f5ec" rx="4" opacity="0.45"/>
+<text x="85" y="207" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G20</text>
+<line x1="134.2" y1="203.0" x2="352.7" y2="203.0" stroke="#4caf73" stroke-width="3" stroke-linecap="round" opacity="0.65"/>
+<circle cx="352.7" cy="203.0" r="7" fill="#2d8a4e" stroke="white" stroke-width="2.5"/>
+<text x="630" y="207" font-size="12" font-weight="600" fill="#4a5568">646</text>
+<rect x="365.7" y="194" width="42" height="17" fill="#2d8a4e" rx="9" opacity="0.9"/>
+<text x="386.7" y="207" font-size="10" font-weight="700" fill="white" text-anchor="middle">+74</text>
+<rect x="92" y="218" width="532" height="30" fill="#e8f5ec" rx="4" opacity="0.45"/>
+<text x="85" y="237" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G70</text>
+<line x1="134.2" y1="233.0" x2="343.9" y2="233.0" stroke="#4caf73" stroke-width="3" stroke-linecap="round" opacity="0.65"/>
+<circle cx="343.9" cy="233.0" r="7" fill="#2d8a4e" stroke="white" stroke-width="2.5"/>
+<text x="630" y="237" font-size="12" font-weight="600" fill="#4a5568">643</text>
+<rect x="356.9" y="224" width="42" height="17" fill="#2d8a4e" rx="9" opacity="0.9"/>
+<text x="377.9" y="237" font-size="10" font-weight="700" fill="white" text-anchor="middle">+71</text>
+<text x="92" y="271" font-size="10.5" font-weight="700" fill="#c0392b" letter-spacing="1.2" opacity="0.8">▸ TESTIGOS COMERCIALES</text>
+<rect x="92" y="280" width="532" height="30" fill="#fdecea" rx="4" opacity="0.45"/>
+<text x="85" y="299" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">Porá_3</text>
+<line x1="134.2" y1="295.0" x2="559.5" y2="295.0" stroke="#e07070" stroke-width="3" stroke-linecap="round" opacity="0.65"/>
+<circle cx="559.5" cy="295.0" r="7" fill="#c0392b" stroke="white" stroke-width="2.5"/>
+<text x="630" y="299" font-size="12" font-weight="600" fill="#4a5568">716</text>
+<rect x="92" y="310" width="532" height="30" fill="#fdecea" rx="4" opacity="0.45"/>
+<text x="85" y="329" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">NuOpal</text>
+<line x1="134.2" y1="325.0" x2="338.0" y2="325.0" stroke="#e07070" stroke-width="3" stroke-linecap="round" opacity="0.65"/>
+<circle cx="338.0" cy="325.0" r="7" fill="#c0392b" stroke="white" stroke-width="2.5"/>
+<text x="630" y="329" font-size="12" font-weight="600" fill="#4a5568">641</text>
+<rect x="92" y="340" width="532" height="30" fill="#fdecea" rx="4" opacity="0.45"/>
+<text x="85" y="359" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">Guaz_4</text>
+<line x1="134.2" y1="355.0" x2="166.7" y2="355.0" stroke="#e07070" stroke-width="3" stroke-linecap="round" opacity="0.65"/>
+<circle cx="166.7" cy="355.0" r="7" fill="#c0392b" stroke="white" stroke-width="2.5"/>
+<text x="630" y="359" font-size="12" font-weight="600" fill="#4a5568">583</text>
+<rect x="92" y="370" width="532" height="30" fill="#fdecea" rx="4" opacity="0.45"/>
+<text x="85" y="389" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">DP_1238</text>
+<line x1="134.2" y1="385.0" x2="134.2" y2="385.0" stroke="#e07070" stroke-width="3" stroke-linecap="round" opacity="0.65"/>
+<circle cx="134.2" cy="385.0" r="7" fill="#c0392b" stroke="white" stroke-width="2.5"/>
+<text x="630" y="389" font-size="12" font-weight="600" fill="#4a5568">572</text>
+<text x="134.2" y="478" font-size="10" fill="#c0392b" text-anchor="middle" opacity="0.75">DP 1238 (572)</text>
+<text x="299.6" y="478" font-size="10" fill="#666" text-anchor="middle" opacity="0.75">Media test. (628)</text>
+</svg>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- COMPONENTES DEL RENDIMIENTO -->
+<section id="componentes" style="background:var(--gris-claro); max-width:100%; padding:56px 20px;">
+<div style="max-width:1100px; margin:0 auto;">
+  <h2 class="section-title">Componentes del Rendimiento</h2>
+  <p class="section-sub">Desmote · Peso de capullo · Número de capullos — Promedio 3 campañas · Línea gris = media de testigos</p>
+  <div class="section-divider"></div>
+
+  <div class="highlight-box">
+    <div class="highlight-icon">📦</div>
+    <div class="highlight-text">
+      <h4>Mayor número de capullos y peso por capullo</h4>
+      <p>Las líneas avanzadas logran mayor rendimiento principalmente vía <strong>mayor número de capullos por planta</strong> (~12–13 vs. ~10–11 en testigos), con peso de capullo y desmote competitivos. G53 y G17 destacan por combinar desmote superior (38–40%) con mayor carga de bochas.</p>
+    </div>
+  </div>
+
+  <div class="grid-3">
+    <div class="card">
+      <h4 style="font-weight:700;color:var(--verde);margin-bottom:6px;">% Desmote</h4>
+      <p style="font-size:11.5px;color:var(--gris-med);margin-bottom:14px;">Línea gris = media testigos (38.4%)</p>
+      <svg xmlns="http://www.w3.org/2000/svg" width="340" height="338" viewBox="0 0 340 338" font-family="'DM Sans',sans-serif">
+<rect width="340" height="338" fill="#fff" rx="8"/>
+<line x1="157.0" y1="8" x2="157.0" y2="316" stroke="#888" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.5"/>
+<rect x="72" y="8" width="213" height="22" fill="#e8f5ec" rx="5" opacity="0.45"/>
+<rect x="72" y="8" width="180.2" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="66" y="23" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G17</text>
+<text x="290" y="23" font-size="11" font-weight="600" fill="#4a5568">39.6%</text>
+<rect x="72" y="36" width="213" height="22" fill="#e8f5ec" rx="5" opacity="0.45"/>
+<rect x="72" y="36" width="180.2" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="66" y="51" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G70</text>
+<text x="290" y="51" font-size="11" font-weight="600" fill="#4a5568">39.6%</text>
+<rect x="72" y="64" width="213" height="22" fill="#fdecea" rx="5" opacity="0.45"/>
+<rect x="72" y="64" width="180.2" height="22" fill="#c0392b" rx="5" opacity="0.82"/>
+<text x="66" y="79" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">Porá_3</text>
+<text x="290" y="79" font-size="11" font-weight="600" fill="#4a5568">39.6%</text>
+<rect x="72" y="92" width="213" height="22" fill="#e8f5ec" rx="5" opacity="0.45"/>
+<rect x="72" y="92" width="158.1" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="66" y="107" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G20</text>
+<text x="290" y="107" font-size="11" font-weight="600" fill="#4a5568">39.2%</text>
+<rect x="72" y="120" width="213" height="22" fill="#e8f5ec" rx="5" opacity="0.45"/>
+<rect x="72" y="120" width="141.6" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="66" y="135" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G16</text>
+<text x="290" y="135" font-size="11" font-weight="600" fill="#4a5568">38.9%</text>
+<rect x="72" y="148" width="213" height="22" fill="#e8f5ec" rx="5" opacity="0.45"/>
+<rect x="72" y="148" width="141.6" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="66" y="163" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G27</text>
+<text x="290" y="163" font-size="11" font-weight="600" fill="#4a5568">38.9%</text>
+<rect x="72" y="176" width="213" height="22" fill="#e8f5ec" rx="5" opacity="0.45"/>
+<rect x="72" y="176" width="119.5" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="66" y="191" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G50</text>
+<text x="290" y="191" font-size="11" font-weight="600" fill="#4a5568">38.5%</text>
+<rect x="72" y="204" width="213" height="22" fill="#e8f5ec" rx="5" opacity="0.45"/>
+<rect x="72" y="204" width="103.0" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="66" y="219" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G53</text>
+<text x="290" y="219" font-size="11" font-weight="600" fill="#4a5568">38.2%</text>
+<rect x="72" y="232" width="213" height="22" fill="#fdecea" rx="5" opacity="0.45"/>
+<rect x="72" y="232" width="64.3" height="22" fill="#c0392b" rx="5" opacity="0.82"/>
+<text x="66" y="247" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">DP_1238</text>
+<text x="290" y="247" font-size="11" font-weight="600" fill="#4a5568">37.5%</text>
+<rect x="72" y="260" width="213" height="22" fill="#fdecea" rx="5" opacity="0.45"/>
+<rect x="72" y="260" width="58.8" height="22" fill="#c0392b" rx="5" opacity="0.82"/>
+<text x="66" y="275" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">Guaz_4</text>
+<text x="290" y="275" font-size="11" font-weight="600" fill="#4a5568">37.4%</text>
+<rect x="72" y="288" width="213" height="22" fill="#fdecea" rx="5" opacity="0.45"/>
+<rect x="72" y="288" width="36.8" height="22" fill="#c0392b" rx="5" opacity="0.82"/>
+<text x="66" y="303" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">NuOpal</text>
+<text x="290" y="303" font-size="11" font-weight="600" fill="#4a5568">37.0%</text>
+<text x="157.0" y="332" font-size="9.5" fill="#666" text-anchor="middle" opacity="0.75">Media test. (37.9%)</text>
+</svg>
+    </div>
+    <div class="card">
+      <h4 style="font-weight:700;color:var(--verde);margin-bottom:6px;">Peso de capullo (g)</h4>
+      <p style="font-size:11.5px;color:var(--gris-med);margin-bottom:14px;">Línea gris = media testigos (5.8 g)</p>
+      <svg xmlns="http://www.w3.org/2000/svg" width="340" height="338" viewBox="0 0 340 338" font-family="'DM Sans',sans-serif">
+<rect width="340" height="338" fill="#fff" rx="8"/>
+<line x1="189.7" y1="8" x2="189.7" y2="316" stroke="#888" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.5"/>
+<rect x="72" y="8" width="213" height="22" fill="#fdecea" rx="5" opacity="0.45"/>
+<rect x="72" y="8" width="193.3" height="22" fill="#c0392b" rx="5" opacity="0.82"/>
+<text x="66" y="23" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">Porá_3</text>
+<text x="290" y="23" font-size="11" font-weight="600" fill="#4a5568">6.1g</text>
+<rect x="72" y="36" width="213" height="22" fill="#e8f5ec" rx="5" opacity="0.45"/>
+<rect x="72" y="36" width="128.5" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="66" y="51" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G53</text>
+<text x="290" y="51" font-size="11" font-weight="600" fill="#4a5568">5.8g</text>
+<rect x="72" y="64" width="213" height="22" fill="#fdecea" rx="5" opacity="0.45"/>
+<rect x="72" y="64" width="128.5" height="22" fill="#c0392b" rx="5" opacity="0.82"/>
+<text x="66" y="79" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">Guaz_4</text>
+<text x="290" y="79" font-size="11" font-weight="600" fill="#4a5568">5.8g</text>
+<rect x="72" y="92" width="213" height="22" fill="#fdecea" rx="5" opacity="0.45"/>
+<rect x="72" y="92" width="106.9" height="22" fill="#c0392b" rx="5" opacity="0.82"/>
+<text x="66" y="107" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">NuOpal</text>
+<text x="290" y="107" font-size="11" font-weight="600" fill="#4a5568">5.7g</text>
+<rect x="72" y="120" width="213" height="22" fill="#e8f5ec" rx="5" opacity="0.45"/>
+<rect x="72" y="120" width="85.3" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="66" y="135" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G17</text>
+<text x="290" y="135" font-size="11" font-weight="600" fill="#4a5568">5.6g</text>
+<rect x="72" y="148" width="213" height="22" fill="#e8f5ec" rx="5" opacity="0.45"/>
+<rect x="72" y="148" width="63.8" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="66" y="163" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G16</text>
+<text x="290" y="163" font-size="11" font-weight="600" fill="#4a5568">5.5g</text>
+<rect x="72" y="176" width="213" height="22" fill="#e8f5ec" rx="5" opacity="0.45"/>
+<rect x="72" y="176" width="63.8" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="66" y="191" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G27</text>
+<text x="290" y="191" font-size="11" font-weight="600" fill="#4a5568">5.5g</text>
+<rect x="72" y="204" width="213" height="22" fill="#e8f5ec" rx="5" opacity="0.45"/>
+<rect x="72" y="204" width="63.8" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="66" y="219" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G50</text>
+<text x="290" y="219" font-size="11" font-weight="600" fill="#4a5568">5.5g</text>
+<rect x="72" y="232" width="213" height="22" fill="#e8f5ec" rx="5" opacity="0.45"/>
+<rect x="72" y="232" width="42.2" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="66" y="247" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G20</text>
+<text x="290" y="247" font-size="11" font-weight="600" fill="#4a5568">5.4g</text>
+<rect x="72" y="260" width="213" height="22" fill="#fdecea" rx="5" opacity="0.45"/>
+<rect x="72" y="260" width="42.2" height="22" fill="#c0392b" rx="5" opacity="0.82"/>
+<text x="66" y="275" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">DP_1238</text>
+<text x="290" y="275" font-size="11" font-weight="600" fill="#4a5568">5.4g</text>
+<rect x="72" y="288" width="213" height="22" fill="#e8f5ec" rx="5" opacity="0.45"/>
+<rect x="72" y="288" width="20.6" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="66" y="303" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G70</text>
+<text x="290" y="303" font-size="11" font-weight="600" fill="#4a5568">5.3g</text>
+<text x="189.7" y="332" font-size="9.5" fill="#666" text-anchor="middle" opacity="0.75">Media test. (5.8g)</text>
+</svg>
+    </div>
+    <div class="card">
+      <h4 style="font-weight:700;color:var(--verde);margin-bottom:6px;">N° capullos / planta</h4>
+      <p style="font-size:11.5px;color:var(--gris-med);margin-bottom:14px;">Línea gris = media testigos (10.6)</p>
+      <svg xmlns="http://www.w3.org/2000/svg" width="340" height="338" viewBox="0 0 340 338" font-family="'DM Sans',sans-serif">
+<rect width="340" height="338" fill="#fff" rx="8"/>
+<line x1="127.1" y1="8" x2="127.1" y2="316" stroke="#888" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.5"/>
+<rect x="72" y="8" width="213" height="22" fill="#e8f5ec" rx="5" opacity="0.45"/>
+<rect x="72" y="8" width="201.8" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="66" y="23" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G53</text>
+<text x="290" y="23" font-size="11" font-weight="600" fill="#4a5568">13.2</text>
+<rect x="72" y="36" width="213" height="22" fill="#e8f5ec" rx="5" opacity="0.45"/>
+<rect x="72" y="36" width="156.7" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="66" y="51" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G16</text>
+<text x="290" y="51" font-size="11" font-weight="600" fill="#4a5568">12.4</text>
+<rect x="72" y="64" width="213" height="22" fill="#e8f5ec" rx="5" opacity="0.45"/>
+<rect x="72" y="64" width="151.0" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="66" y="79" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G27</text>
+<text x="290" y="79" font-size="11" font-weight="600" fill="#4a5568">12.3</text>
+<rect x="72" y="92" width="213" height="22" fill="#e8f5ec" rx="5" opacity="0.45"/>
+<rect x="72" y="92" width="139.8" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="66" y="107" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G17</text>
+<text x="290" y="107" font-size="11" font-weight="600" fill="#4a5568">12.1</text>
+<rect x="72" y="120" width="213" height="22" fill="#e8f5ec" rx="5" opacity="0.45"/>
+<rect x="72" y="120" width="122.8" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="66" y="135" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G50</text>
+<text x="290" y="135" font-size="11" font-weight="600" fill="#4a5568">11.8</text>
+<rect x="72" y="148" width="213" height="22" fill="#e8f5ec" rx="5" opacity="0.45"/>
+<rect x="72" y="148" width="111.5" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="66" y="163" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G20</text>
+<text x="290" y="163" font-size="11" font-weight="600" fill="#4a5568">11.6</text>
+<rect x="72" y="176" width="213" height="22" fill="#e8f5ec" rx="5" opacity="0.45"/>
+<rect x="72" y="176" width="100.2" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="66" y="191" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G70</text>
+<text x="290" y="191" font-size="11" font-weight="600" fill="#4a5568">11.4</text>
+<rect x="72" y="204" width="213" height="22" fill="#fdecea" rx="5" opacity="0.45"/>
+<rect x="72" y="204" width="94.6" height="22" fill="#c0392b" rx="5" opacity="0.82"/>
+<text x="66" y="219" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">NuOpal</text>
+<text x="290" y="219" font-size="11" font-weight="600" fill="#4a5568">11.3</text>
+<rect x="72" y="232" width="213" height="22" fill="#fdecea" rx="5" opacity="0.45"/>
+<rect x="72" y="232" width="77.7" height="22" fill="#c0392b" rx="5" opacity="0.82"/>
+<text x="66" y="247" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">Porá_3</text>
+<text x="290" y="247" font-size="11" font-weight="600" fill="#4a5568">11.0</text>
+<rect x="72" y="260" width="213" height="22" fill="#fdecea" rx="5" opacity="0.45"/>
+<rect x="72" y="260" width="38.2" height="22" fill="#c0392b" rx="5" opacity="0.82"/>
+<text x="66" y="275" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">DP_1238</text>
+<text x="290" y="275" font-size="11" font-weight="600" fill="#4a5568">10.3</text>
+<rect x="72" y="288" width="213" height="22" fill="#fdecea" rx="5" opacity="0.45"/>
+<rect x="72" y="288" width="10.0" height="22" fill="#c0392b" rx="5" opacity="0.82"/>
+<text x="66" y="303" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">Guaz_4</text>
+<text x="290" y="303" font-size="11" font-weight="600" fill="#4a5568">9.8</text>
+<text x="127.1" y="332" font-size="9.5" fill="#666" text-anchor="middle" opacity="0.75">Media test. (10.6)</text>
+</svg>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- CALIDAD HVI -->
+<section id="calidad" style="background:var(--gris-claro); max-width:100%; padding:56px 20px;">
+<div style="max-width:1100px; margin:0 auto;">
+  <h2 class="section-title">Calidad de Fibra HVI</h2>
+  <p class="section-sub">Micronaire · Longitud · Resistencia · Uniformidad — Promedio 3 campañas</p>
+  <div class="section-divider"></div>
+
+  <div class="highlight-box">
+    <div class="highlight-icon">🎯</div>
+    <div class="highlight-text">
+      <h4>Calidad de fibra competitiva con micronaire óptimo</h4>
+      <p>Las líneas avanzadas presentan valores de Micronaire en rango óptimo (3.7–4.6), con longitud y resistencia similares o superiores a los testigos comerciales. G20 destaca con la mayor longitud de fibra (28.1 mm).</p>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h4 style="font-weight:700;color:var(--verde);margin-bottom:16px;">Micronaire (rango óptimo: 3.7–4.6)</h4>
+      <div id="chart-mic"><svg xmlns="http://www.w3.org/2000/svg" width="320" height="322" viewBox="0 0 320 322" font-family="'DM Sans',sans-serif">
+<rect width="320" height="322" fill="#fff" rx="8"/>
+<line x1="162.5" y1="8" x2="162.5" y2="316" stroke="#888" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.5"/>
+<rect x="68" y="8" width="200" height="22" fill="#e8f5ec" rx="5" opacity="0.4"/>
+<rect x="68" y="8" width="181.5" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="62" y="23" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G53</text>
+<text x="273" y="23" font-size="11" font-weight="600" fill="#4a5568">4.3</text>
+<rect x="68" y="36" width="200" height="22" fill="#e8f5ec" rx="5" opacity="0.4"/>
+<rect x="68" y="36" width="143.3" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="62" y="51" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G17</text>
+<text x="273" y="51" font-size="11" font-weight="600" fill="#4a5568">4.3</text>
+<rect x="68" y="64" width="200" height="22" fill="#fdecea" rx="5" opacity="0.4"/>
+<rect x="68" y="64" width="143.3" height="22" fill="#c0392b" rx="5" opacity="0.82"/>
+<text x="62" y="79" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">Porá_3</text>
+<text x="273" y="79" font-size="11" font-weight="600" fill="#4a5568">4.3</text>
+<rect x="68" y="92" width="200" height="22" fill="#e8f5ec" rx="5" opacity="0.4"/>
+<rect x="68" y="92" width="139.1" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="62" y="107" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G16</text>
+<text x="273" y="107" font-size="11" font-weight="600" fill="#4a5568">4.2</text>
+<rect x="68" y="120" width="200" height="22" fill="#e8f5ec" rx="5" opacity="0.4"/>
+<rect x="68" y="120" width="139.1" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="62" y="135" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G27</text>
+<text x="273" y="135" font-size="11" font-weight="600" fill="#4a5568">4.2</text>
+<rect x="68" y="148" width="200" height="22" fill="#e8f5ec" rx="5" opacity="0.4"/>
+<rect x="68" y="148" width="109.4" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="62" y="163" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G70</text>
+<text x="273" y="163" font-size="11" font-weight="600" fill="#4a5568">4.2</text>
+<rect x="68" y="176" width="200" height="22" fill="#fdecea" rx="5" opacity="0.4"/>
+<rect x="68" y="176" width="79.7" height="22" fill="#c0392b" rx="5" opacity="0.82"/>
+<text x="62" y="191" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">Guaz_4</text>
+<text x="273" y="191" font-size="11" font-weight="600" fill="#4a5568">4.1</text>
+<rect x="68" y="204" width="200" height="22" fill="#fdecea" rx="5" opacity="0.4"/>
+<rect x="68" y="204" width="79.7" height="22" fill="#c0392b" rx="5" opacity="0.82"/>
+<text x="62" y="219" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">DP_1238</text>
+<text x="273" y="219" font-size="11" font-weight="600" fill="#4a5568">4.1</text>
+<rect x="68" y="232" width="200" height="22" fill="#e8f5ec" rx="5" opacity="0.4"/>
+<rect x="68" y="232" width="75.4" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="62" y="247" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G50</text>
+<text x="273" y="247" font-size="11" font-weight="600" fill="#4a5568">4.1</text>
+<rect x="68" y="260" width="200" height="22" fill="#fdecea" rx="5" opacity="0.4"/>
+<rect x="68" y="260" width="75.4" height="22" fill="#c0392b" rx="5" opacity="0.82"/>
+<text x="62" y="275" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">NuOpal</text>
+<text x="273" y="275" font-size="11" font-weight="600" fill="#4a5568">4.1</text>
+<rect x="68" y="288" width="200" height="22" fill="#e8f5ec" rx="5" opacity="0.4"/>
+<rect x="68" y="288" width="20.2" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="62" y="303" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G20</text>
+<text x="273" y="303" font-size="11" font-weight="600" fill="#4a5568">4.0</text>
+</svg></div>      
+    </div>
+    <div class="card">
+      <h4 style="font-weight:700;color:var(--verde);margin-bottom:16px;">Longitud de fibra (mm)</h4>
+      <div id="chart-longitud"><svg xmlns="http://www.w3.org/2000/svg" width="320" height="322" viewBox="0 0 320 322" font-family="'DM Sans',sans-serif">
+<rect width="320" height="322" fill="#fff" rx="8"/>
+<line x1="172.2" y1="8" x2="172.2" y2="316" stroke="#888" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.5"/>
+<rect x="68" y="8" width="200" height="22" fill="#e8f5ec" rx="5" opacity="0.4"/>
+<rect x="68" y="8" width="173.2" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="62" y="23" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G20</text>
+<text x="273" y="23" font-size="11" font-weight="600" fill="#4a5568">28.1mm</text>
+<rect x="68" y="36" width="200" height="22" fill="#e8f5ec" rx="5" opacity="0.4"/>
+<rect x="68" y="36" width="154.2" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="62" y="51" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G50</text>
+<text x="273" y="51" font-size="11" font-weight="600" fill="#4a5568">27.9mm</text>
+<rect x="68" y="64" width="200" height="22" fill="#fdecea" rx="5" opacity="0.4"/>
+<rect x="68" y="64" width="154.2" height="22" fill="#c0392b" rx="5" opacity="0.82"/>
+<text x="62" y="79" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">DP_1238</text>
+<text x="273" y="79" font-size="11" font-weight="600" fill="#4a5568">27.9mm</text>
+<rect x="68" y="92" width="200" height="22" fill="#e8f5ec" rx="5" opacity="0.4"/>
+<rect x="68" y="92" width="144.7" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="62" y="107" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G17</text>
+<text x="273" y="107" font-size="11" font-weight="600" fill="#4a5568">27.8mm</text>
+<rect x="68" y="120" width="200" height="22" fill="#e8f5ec" rx="5" opacity="0.4"/>
+<rect x="68" y="120" width="144.7" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="62" y="135" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G16</text>
+<text x="273" y="135" font-size="11" font-weight="600" fill="#4a5568">27.8mm</text>
+<rect x="68" y="148" width="200" height="22" fill="#fdecea" rx="5" opacity="0.4"/>
+<rect x="68" y="148" width="144.7" height="22" fill="#c0392b" rx="5" opacity="0.82"/>
+<text x="62" y="163" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">NuOpal</text>
+<text x="273" y="163" font-size="11" font-weight="600" fill="#4a5568">27.8mm</text>
+<rect x="68" y="176" width="200" height="22" fill="#e8f5ec" rx="5" opacity="0.4"/>
+<rect x="68" y="176" width="135.1" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="62" y="191" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G27</text>
+<text x="273" y="191" font-size="11" font-weight="600" fill="#4a5568">27.7mm</text>
+<rect x="68" y="204" width="200" height="22" fill="#e8f5ec" rx="5" opacity="0.4"/>
+<rect x="68" y="204" width="125.6" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="62" y="219" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G70</text>
+<text x="273" y="219" font-size="11" font-weight="600" fill="#4a5568">27.6mm</text>
+<rect x="68" y="232" width="200" height="22" fill="#e8f5ec" rx="5" opacity="0.4"/>
+<rect x="68" y="232" width="116.1" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="62" y="247" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G53</text>
+<text x="273" y="247" font-size="11" font-weight="600" fill="#4a5568">27.5mm</text>
+<rect x="68" y="260" width="200" height="22" fill="#fdecea" rx="5" opacity="0.4"/>
+<rect x="68" y="260" width="87.5" height="22" fill="#c0392b" rx="5" opacity="0.82"/>
+<text x="62" y="275" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">Guaz_4</text>
+<text x="273" y="275" font-size="11" font-weight="600" fill="#4a5568">27.2mm</text>
+<rect x="68" y="288" width="200" height="22" fill="#fdecea" rx="5" opacity="0.4"/>
+<rect x="68" y="288" width="30.4" height="22" fill="#c0392b" rx="5" opacity="0.82"/>
+<text x="62" y="303" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">Porá_3</text>
+<text x="273" y="303" font-size="11" font-weight="600" fill="#4a5568">26.6mm</text>
+</svg></div>
+    </div>
+    <div class="card">
+      <h4 style="font-weight:700;color:var(--verde);margin-bottom:16px;">Resistencia (g/tex)</h4>
+      <div id="chart-resist"><svg xmlns="http://www.w3.org/2000/svg" width="320" height="322" viewBox="0 0 320 322" font-family="'DM Sans',sans-serif">
+<rect width="320" height="322" fill="#fff" rx="8"/>
+<line x1="199.6" y1="8" x2="199.6" y2="316" stroke="#888" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.5"/>
+<rect x="68" y="8" width="200" height="22" fill="#fdecea" rx="5" opacity="0.4"/>
+<rect x="68" y="8" width="180.7" height="22" fill="#c0392b" rx="5" opacity="0.82"/>
+<text x="62" y="23" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">DP_1238</text>
+<text x="273" y="23" font-size="11" font-weight="600" fill="#4a5568">31.5</text>
+<rect x="68" y="36" width="200" height="22" fill="#fdecea" rx="5" opacity="0.4"/>
+<rect x="68" y="36" width="174.6" height="22" fill="#c0392b" rx="5" opacity="0.82"/>
+<text x="62" y="51" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">NuOpal</text>
+<text x="273" y="51" font-size="11" font-weight="600" fill="#4a5568">31.4</text>
+<rect x="68" y="64" width="200" height="22" fill="#e8f5ec" rx="5" opacity="0.4"/>
+<rect x="68" y="64" width="162.3" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="62" y="79" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G53</text>
+<text x="273" y="79" font-size="11" font-weight="600" fill="#4a5568">31.2</text>
+<rect x="68" y="92" width="200" height="22" fill="#e8f5ec" rx="5" opacity="0.4"/>
+<rect x="68" y="92" width="137.8" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="62" y="107" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G17</text>
+<text x="273" y="107" font-size="11" font-weight="600" fill="#4a5568">30.8</text>
+<rect x="68" y="120" width="200" height="22" fill="#e8f5ec" rx="5" opacity="0.4"/>
+<rect x="68" y="120" width="125.5" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="62" y="135" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G16</text>
+<text x="273" y="135" font-size="11" font-weight="600" fill="#4a5568">30.6</text>
+<rect x="68" y="148" width="200" height="22" fill="#e8f5ec" rx="5" opacity="0.4"/>
+<rect x="68" y="148" width="107.1" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="62" y="163" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G27</text>
+<text x="273" y="163" font-size="11" font-weight="600" fill="#4a5568">30.3</text>
+<rect x="68" y="176" width="200" height="22" fill="#fdecea" rx="5" opacity="0.4"/>
+<rect x="68" y="176" width="107.1" height="22" fill="#c0392b" rx="5" opacity="0.82"/>
+<text x="62" y="191" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">Porá_3</text>
+<text x="273" y="191" font-size="11" font-weight="600" fill="#4a5568">30.3</text>
+<rect x="68" y="204" width="200" height="22" fill="#e8f5ec" rx="5" opacity="0.4"/>
+<rect x="68" y="204" width="76.4" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="62" y="219" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G50</text>
+<text x="273" y="219" font-size="11" font-weight="600" fill="#4a5568">29.8</text>
+<rect x="68" y="232" width="200" height="22" fill="#e8f5ec" rx="5" opacity="0.4"/>
+<rect x="68" y="232" width="70.3" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="62" y="247" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G20</text>
+<text x="273" y="247" font-size="11" font-weight="600" fill="#4a5568">29.7</text>
+<rect x="68" y="260" width="200" height="22" fill="#fdecea" rx="5" opacity="0.4"/>
+<rect x="68" y="260" width="64.2" height="22" fill="#c0392b" rx="5" opacity="0.82"/>
+<text x="62" y="275" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">Guaz_4</text>
+<text x="273" y="275" font-size="11" font-weight="600" fill="#4a5568">29.6</text>
+<rect x="68" y="288" width="200" height="22" fill="#e8f5ec" rx="5" opacity="0.4"/>
+<rect x="68" y="288" width="21.3" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="62" y="303" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G70</text>
+<text x="273" y="303" font-size="11" font-weight="600" fill="#4a5568">28.9</text>
+</svg></div>
+    </div>
+    <div class="card">
+      <h4 style="font-weight:700;color:var(--verde);margin-bottom:16px;">Uniformidad de fibra (%)</h4>
+      <div id="chart-unif"><svg xmlns="http://www.w3.org/2000/svg" width="320" height="322" viewBox="0 0 320 322" font-family="'DM Sans',sans-serif">
+<rect width="320" height="322" fill="#fff" rx="8"/>
+<line x1="193.2" y1="8" x2="193.2" y2="316" stroke="#888" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.5"/>
+<rect x="68" y="8" width="200" height="22" fill="#fdecea" rx="5" opacity="0.4"/>
+<rect x="68" y="8" width="141.3" height="22" fill="#c0392b" rx="5" opacity="0.82"/>
+<text x="62" y="23" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">Porá_3</text>
+<text x="273" y="23" font-size="11" font-weight="600" fill="#4a5568">81.9%</text>
+<rect x="68" y="36" width="200" height="22" fill="#e8f5ec" rx="5" opacity="0.4"/>
+<rect x="68" y="36" width="134.1" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="62" y="51" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G17</text>
+<text x="273" y="51" font-size="11" font-weight="600" fill="#4a5568">81.8%</text>
+<rect x="68" y="64" width="200" height="22" fill="#fdecea" rx="5" opacity="0.4"/>
+<rect x="68" y="64" width="134.1" height="22" fill="#c0392b" rx="5" opacity="0.82"/>
+<text x="62" y="79" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">NuOpal</text>
+<text x="273" y="79" font-size="11" font-weight="600" fill="#4a5568">81.8%</text>
+<rect x="68" y="92" width="200" height="22" fill="#fdecea" rx="5" opacity="0.4"/>
+<rect x="68" y="92" width="134.1" height="22" fill="#c0392b" rx="5" opacity="0.82"/>
+<text x="62" y="107" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">DP_1238</text>
+<text x="273" y="107" font-size="11" font-weight="600" fill="#4a5568">81.8%</text>
+<rect x="68" y="120" width="200" height="22" fill="#e8f5ec" rx="5" opacity="0.4"/>
+<rect x="68" y="120" width="119.8" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="62" y="135" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G53</text>
+<text x="273" y="135" font-size="11" font-weight="600" fill="#4a5568">81.6%</text>
+<rect x="68" y="148" width="200" height="22" fill="#e8f5ec" rx="5" opacity="0.4"/>
+<rect x="68" y="148" width="119.8" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="62" y="163" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G27</text>
+<text x="273" y="163" font-size="11" font-weight="600" fill="#4a5568">81.6%</text>
+<rect x="68" y="176" width="200" height="22" fill="#e8f5ec" rx="5" opacity="0.4"/>
+<rect x="68" y="176" width="112.6" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="62" y="191" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G20</text>
+<text x="273" y="191" font-size="11" font-weight="600" fill="#4a5568">81.5%</text>
+<rect x="68" y="204" width="200" height="22" fill="#e8f5ec" rx="5" opacity="0.4"/>
+<rect x="68" y="204" width="112.6" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="62" y="219" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G70</text>
+<text x="273" y="219" font-size="11" font-weight="600" fill="#4a5568">81.5%</text>
+<rect x="68" y="232" width="200" height="22" fill="#e8f5ec" rx="5" opacity="0.4"/>
+<rect x="68" y="232" width="98.3" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="62" y="247" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G50</text>
+<text x="273" y="247" font-size="11" font-weight="600" fill="#4a5568">81.3%</text>
+<rect x="68" y="260" width="200" height="22" fill="#fdecea" rx="5" opacity="0.4"/>
+<rect x="68" y="260" width="91.1" height="22" fill="#c0392b" rx="5" opacity="0.82"/>
+<text x="62" y="275" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">Guaz_4</text>
+<text x="273" y="275" font-size="11" font-weight="600" fill="#4a5568">81.2%</text>
+<rect x="68" y="288" width="200" height="22" fill="#e8f5ec" rx="5" opacity="0.4"/>
+<rect x="68" y="288" width="69.6" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="62" y="303" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G16</text>
+<text x="273" y="303" font-size="11" font-weight="600" fill="#4a5568">80.9%</text>
+</svg></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- FENOLOGIA -->
+<section id="fenologia">
+  <h2 class="section-title">Fenología — Campaña 2025/26</h2>
+  <p class="section-sub">Ciclos más cortos → menor período de riesgo y mayor eficiencia hídrica</p>
+  <div class="section-divider"></div>
+
+  <div class="highlight-box">
+    <div class="highlight-icon">⏱️</div>
+    <div class="highlight-text">
+      <h4>Las líneas avanzadas cortan el ciclo 1–5 días antes que los testigos</h4>
+      <p>El Cut Out anticipado reduce el período de riesgo climático y permite mayor eficiencia en el uso del agua durante el período crítico. La primer bocha abierta llega hasta 10 días antes en las líneas avanzadas.</p>
+    </div>
+  </div>
+
+  <div class="card"><div style="overflow-x:auto;"><svg xmlns="http://www.w3.org/2000/svg" width="700" height="452" viewBox="0 0 700 452" font-family="'DM Sans',sans-serif">
+<rect width="700" height="452" fill="#fff" rx="10"/>
+<line x1="72.0" y1="28" x2="72.0" y2="424" stroke="#ddd" stroke-width="1"/>
+<text x="72.0" y="20" font-size="9.5" fill="#999" text-anchor="middle">27-Jan</text>
+<line x1="143.4" y1="28" x2="143.4" y2="424" stroke="#ddd" stroke-width="1"/>
+<text x="143.4" y="20" font-size="9.5" fill="#999" text-anchor="middle">3-Feb</text>
+<line x1="214.8" y1="28" x2="214.8" y2="424" stroke="#ddd" stroke-width="1"/>
+<text x="214.8" y="20" font-size="9.5" fill="#999" text-anchor="middle">10-Feb</text>
+<line x1="286.2" y1="28" x2="286.2" y2="424" stroke="#ddd" stroke-width="1"/>
+<text x="286.2" y="20" font-size="9.5" fill="#999" text-anchor="middle">17-Feb</text>
+<line x1="357.6" y1="28" x2="357.6" y2="424" stroke="#ddd" stroke-width="1"/>
+<text x="357.6" y="20" font-size="9.5" fill="#999" text-anchor="middle">24-Feb</text>
+<line x1="429.0" y1="28" x2="429.0" y2="424" stroke="#ddd" stroke-width="1"/>
+<text x="429.0" y="20" font-size="9.5" fill="#999" text-anchor="middle">3-Mar</text>
+<line x1="500.4" y1="28" x2="500.4" y2="424" stroke="#ddd" stroke-width="1"/>
+<text x="500.4" y="20" font-size="9.5" fill="#999" text-anchor="middle">10-Mar</text>
+<line x1="571.8" y1="28" x2="571.8" y2="424" stroke="#ddd" stroke-width="1"/>
+<text x="571.8" y="20" font-size="9.5" fill="#999" text-anchor="middle">17-Mar</text>
+<line x1="643.2" y1="28" x2="643.2" y2="424" stroke="#ddd" stroke-width="1"/>
+<text x="643.2" y="20" font-size="9.5" fill="#999" text-anchor="middle">24-Mar</text>
+<rect x="72" y="28" width="612" height="28" fill="#e8f5ec" rx="4" opacity="0.35"/>
+<rect x="72.0" y="37" width="142.8" height="10" fill="#2d8a4e" rx="3" opacity="0.75"/>
+<rect x="214.8" y="37" width="367.2" height="10" fill="#E76F51" rx="3" opacity="0.65"/>
+<circle cx="72.0" cy="42.0" r="5" fill="#2d8a4e" stroke="white" stroke-width="1.5"/>
+<circle cx="214.8" cy="42.0" r="4" fill="#2d8a4e" stroke="white" stroke-width="1.5"/>
+<circle cx="582.0" cy="42.0" r="4" fill="#E76F51" stroke="white" stroke-width="1.5"/>
+<text x="66" y="46" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G16</text>
+<text x="143.4" y="35" font-size="9" fill="#2d8a4e" text-anchor="middle" font-weight="700">14d</text>
+<rect x="72" y="61" width="612" height="28" fill="#e8f5ec" rx="4" opacity="0.35"/>
+<rect x="82.2" y="70" width="142.8" height="10" fill="#2d8a4e" rx="3" opacity="0.75"/>
+<rect x="225.0" y="70" width="357.0" height="10" fill="#E76F51" rx="3" opacity="0.65"/>
+<circle cx="82.2" cy="75.0" r="5" fill="#2d8a4e" stroke="white" stroke-width="1.5"/>
+<circle cx="225.0" cy="75.0" r="4" fill="#2d8a4e" stroke="white" stroke-width="1.5"/>
+<circle cx="582.0" cy="75.0" r="4" fill="#E76F51" stroke="white" stroke-width="1.5"/>
+<text x="66" y="79" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G17</text>
+<text x="153.6" y="68" font-size="9" fill="#2d8a4e" text-anchor="middle" font-weight="700">14d</text>
+<rect x="72" y="94" width="612" height="28" fill="#e8f5ec" rx="4" opacity="0.35"/>
+<rect x="92.4" y="103" width="132.6" height="10" fill="#2d8a4e" rx="3" opacity="0.75"/>
+<rect x="225.0" y="103" width="357.0" height="10" fill="#E76F51" rx="3" opacity="0.65"/>
+<circle cx="92.4" cy="108.0" r="5" fill="#2d8a4e" stroke="white" stroke-width="1.5"/>
+<circle cx="225.0" cy="108.0" r="4" fill="#2d8a4e" stroke="white" stroke-width="1.5"/>
+<circle cx="582.0" cy="108.0" r="4" fill="#E76F51" stroke="white" stroke-width="1.5"/>
+<text x="66" y="112" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G20</text>
+<text x="158.7" y="101" font-size="9" fill="#2d8a4e" text-anchor="middle" font-weight="700">13d</text>
+<rect x="72" y="127" width="612" height="28" fill="#e8f5ec" rx="4" opacity="0.35"/>
+<rect x="92.4" y="136" width="132.6" height="10" fill="#2d8a4e" rx="3" opacity="0.75"/>
+<rect x="225.0" y="136" width="357.0" height="10" fill="#E76F51" rx="3" opacity="0.65"/>
+<circle cx="92.4" cy="141.0" r="5" fill="#2d8a4e" stroke="white" stroke-width="1.5"/>
+<circle cx="225.0" cy="141.0" r="4" fill="#2d8a4e" stroke="white" stroke-width="1.5"/>
+<circle cx="582.0" cy="141.0" r="4" fill="#E76F51" stroke="white" stroke-width="1.5"/>
+<text x="66" y="145" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G27</text>
+<text x="158.7" y="134" font-size="9" fill="#2d8a4e" text-anchor="middle" font-weight="700">13d</text>
+<rect x="72" y="160" width="612" height="28" fill="#e8f5ec" rx="4" opacity="0.35"/>
+<rect x="92.4" y="169" width="132.6" height="10" fill="#2d8a4e" rx="3" opacity="0.75"/>
+<rect x="225.0" y="169" width="357.0" height="10" fill="#E76F51" rx="3" opacity="0.65"/>
+<circle cx="92.4" cy="174.0" r="5" fill="#2d8a4e" stroke="white" stroke-width="1.5"/>
+<circle cx="225.0" cy="174.0" r="4" fill="#2d8a4e" stroke="white" stroke-width="1.5"/>
+<circle cx="582.0" cy="174.0" r="4" fill="#E76F51" stroke="white" stroke-width="1.5"/>
+<text x="66" y="178" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G50</text>
+<text x="158.7" y="167" font-size="9" fill="#2d8a4e" text-anchor="middle" font-weight="700">13d</text>
+<rect x="72" y="193" width="612" height="28" fill="#e8f5ec" rx="4" opacity="0.35"/>
+<rect x="92.4" y="202" width="132.6" height="10" fill="#2d8a4e" rx="3" opacity="0.75"/>
+<rect x="225.0" y="202" width="377.4" height="10" fill="#E76F51" rx="3" opacity="0.65"/>
+<circle cx="92.4" cy="207.0" r="5" fill="#2d8a4e" stroke="white" stroke-width="1.5"/>
+<circle cx="225.0" cy="207.0" r="4" fill="#2d8a4e" stroke="white" stroke-width="1.5"/>
+<circle cx="602.4" cy="207.0" r="4" fill="#E76F51" stroke="white" stroke-width="1.5"/>
+<text x="66" y="211" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G53</text>
+<text x="158.7" y="200" font-size="9" fill="#2d8a4e" text-anchor="middle" font-weight="700">13d</text>
+<rect x="72" y="226" width="612" height="28" fill="#e8f5ec" rx="4" opacity="0.35"/>
+<rect x="102.6" y="235" width="122.4" height="10" fill="#2d8a4e" rx="3" opacity="0.75"/>
+<rect x="225.0" y="235" width="357.0" height="10" fill="#E76F51" rx="3" opacity="0.65"/>
+<circle cx="102.6" cy="240.0" r="5" fill="#2d8a4e" stroke="white" stroke-width="1.5"/>
+<circle cx="225.0" cy="240.0" r="4" fill="#2d8a4e" stroke="white" stroke-width="1.5"/>
+<circle cx="582.0" cy="240.0" r="4" fill="#E76F51" stroke="white" stroke-width="1.5"/>
+<text x="66" y="244" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G70</text>
+<text x="163.8" y="233" font-size="9" fill="#2d8a4e" text-anchor="middle" font-weight="700">12d</text>
+<rect x="72" y="259" width="612" height="28" fill="#fdecea" rx="4" opacity="0.35"/>
+<rect x="112.8" y="268" width="153.0" height="10" fill="#c0392b" rx="3" opacity="0.75"/>
+<rect x="265.8" y="268" width="377.4" height="10" fill="#E76F51" rx="3" opacity="0.65"/>
+<circle cx="112.8" cy="273.0" r="5" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+<circle cx="265.8" cy="273.0" r="4" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+<circle cx="643.2" cy="273.0" r="4" fill="#E76F51" stroke="white" stroke-width="1.5"/>
+<text x="66" y="277" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">Porá 3</text>
+<text x="189.3" y="266" font-size="9" fill="#c0392b" text-anchor="middle" font-weight="700">15d</text>
+<rect x="72" y="292" width="612" height="28" fill="#fdecea" rx="4" opacity="0.35"/>
+<rect x="112.8" y="301" width="153.0" height="10" fill="#c0392b" rx="3" opacity="0.75"/>
+<rect x="265.8" y="301" width="377.4" height="10" fill="#E76F51" rx="3" opacity="0.65"/>
+<circle cx="112.8" cy="306.0" r="5" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+<circle cx="265.8" cy="306.0" r="4" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+<circle cx="643.2" cy="306.0" r="4" fill="#E76F51" stroke="white" stroke-width="1.5"/>
+<text x="66" y="310" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">G. 4</text>
+<text x="189.3" y="299" font-size="9" fill="#c0392b" text-anchor="middle" font-weight="700">15d</text>
+<rect x="72" y="325" width="612" height="28" fill="#fdecea" rx="4" opacity="0.35"/>
+<rect x="133.2" y="334" width="153.0" height="10" fill="#c0392b" rx="3" opacity="0.75"/>
+<rect x="286.2" y="334" width="377.4" height="10" fill="#E76F51" rx="3" opacity="0.65"/>
+<circle cx="133.2" cy="339.0" r="5" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+<circle cx="286.2" cy="339.0" r="4" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+<circle cx="663.6" cy="339.0" r="4" fill="#E76F51" stroke="white" stroke-width="1.5"/>
+<text x="66" y="343" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">NuOpal</text>
+<text x="209.7" y="332" font-size="9" fill="#c0392b" text-anchor="middle" font-weight="700">15d</text>
+<rect x="72" y="358" width="612" height="28" fill="#fdecea" rx="4" opacity="0.35"/>
+<rect x="143.4" y="367" width="153.0" height="10" fill="#c0392b" rx="3" opacity="0.75"/>
+<rect x="296.4" y="367" width="387.6" height="10" fill="#E76F51" rx="3" opacity="0.65"/>
+<circle cx="143.4" cy="372.0" r="5" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+<circle cx="296.4" cy="372.0" r="4" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+<circle cx="684.0" cy="372.0" r="4" fill="#E76F51" stroke="white" stroke-width="1.5"/>
+<text x="66" y="376" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">DP 1238</text>
+<text x="219.9" y="365" font-size="9" fill="#c0392b" text-anchor="middle" font-weight="700">15d</text>
+<rect x="72" y="391" width="612" height="28" fill="#fdecea" rx="4" opacity="0.35"/>
+<rect x="82.2" y="400" width="142.8" height="10" fill="#c0392b" rx="3" opacity="0.75"/>
+<rect x="225.0" y="400" width="357.0" height="10" fill="#E76F51" rx="3" opacity="0.65"/>
+<circle cx="82.2" cy="405.0" r="5" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+<circle cx="225.0" cy="405.0" r="4" fill="#c0392b" stroke="white" stroke-width="1.5"/>
+<circle cx="582.0" cy="405.0" r="4" fill="#E76F51" stroke="white" stroke-width="1.5"/>
+<text x="66" y="409" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">Garaní</text>
+<text x="153.6" y="398" font-size="9" fill="#c0392b" text-anchor="middle" font-weight="700">14d</text>
+<rect x="72" y="434" width="14" height="10" fill="#2d8a4e" rx="2" opacity="0.8"/>
+<text x="89" y="443" font-size="10" fill="#555">Flor → Cut Out (línea)</text>
+<rect x="225.6" y="434" width="14" height="10" fill="#c0392b" rx="2" opacity="0.8"/>
+<text x="242.6" y="443" font-size="10" fill="#555">Flor → Cut Out (testigo)</text>
+<rect x="390.79999999999995" y="434" width="14" height="10" fill="#E76F51" rx="2" opacity="0.8"/>
+<text x="407.79999999999995" y="443" font-size="10" fill="#555">Cut Out → 1° Bocha</text>
+</svg></div></div>
+</section>
+
+<!-- BIOMASA -->
+<section id="biomasa" style="background:var(--gris-claro); max-width:100%; padding:56px 20px;">
+<div style="max-width:1100px; margin:0 auto;">
+  <h2 class="section-title">Partición de Biomasa</h2>
+  <p class="section-sub">Estudio de materia seca · Campaña 2024/25 · INASE</p>
+  <div class="section-divider"></div>
+
+  <div class="photo-grid" style="margin-bottom:28px;">
+    <div class="photo-card">
+      <img src="img/compacta_abierta.jpeg" alt="Estructura compacta vs abierta"/>
+      <div class="photo-caption">Estructura compacta (sin ramas veg.) vs. estructura abierta con ramas vegetativas</div>
+    </div>
+    <div class="photo-card">
+      <img src="img/retencion.jpeg" alt="Alta retención de bochas"/>
+      <div class="photo-caption">Alta retención de bochas en primera posición — signo de eficiente partición reproductiva</div>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <div class="highlight-icon">🌿</div>
+    <div class="highlight-text">
+      <h4>~80% de la biomasa va a estructuras reproductivas</h4>
+      <p>Las líneas avanzadas dirigen entre 74% y 86% de su materia seca a carpelos, fibra y estructuras reproductivas, frente al 43–57% de los testigos. Este atributo se asocia directamente a mayor eficiencia de cosecha y aptitud para sistemas <em>stripper</em>.</p>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h4 style="font-weight:700;color:var(--verde);margin-bottom:16px;">Proporción reproductiva (%)</h4>
+      <div id="chart-propreprod"><svg xmlns="http://www.w3.org/2000/svg" width="320" height="294" viewBox="0 0 320 294" font-family="'DM Sans',sans-serif">
+<rect width="320" height="294" fill="#fff" rx="8"/>
+<line x1="177.1" y1="8" x2="177.1" y2="288" stroke="#888" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.5"/>
+<rect x="68" y="8" width="200" height="22" fill="#e8f5ec" rx="5" opacity="0.4"/>
+<rect x="68" y="8" width="196.1" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="62" y="23" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G50</text>
+<text x="273" y="23" font-size="11" font-weight="600" fill="#4a5568">85.9%</text>
+<rect x="68" y="36" width="200" height="22" fill="#e8f5ec" rx="5" opacity="0.4"/>
+<rect x="68" y="36" width="186.5" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="62" y="51" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G16</text>
+<text x="273" y="51" font-size="11" font-weight="600" fill="#4a5568">81.7%</text>
+<rect x="68" y="64" width="200" height="22" fill="#e8f5ec" rx="5" opacity="0.4"/>
+<rect x="68" y="64" width="184.2" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="62" y="79" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G20</text>
+<text x="273" y="79" font-size="11" font-weight="600" fill="#4a5568">80.7%</text>
+<rect x="68" y="92" width="200" height="22" fill="#e8f5ec" rx="5" opacity="0.4"/>
+<rect x="68" y="92" width="181.5" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="62" y="107" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G53</text>
+<text x="273" y="107" font-size="11" font-weight="600" fill="#4a5568">79.5%</text>
+<rect x="68" y="120" width="200" height="22" fill="#e8f5ec" rx="5" opacity="0.4"/>
+<rect x="68" y="120" width="177.4" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="62" y="135" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G17</text>
+<text x="273" y="135" font-size="11" font-weight="600" fill="#4a5568">77.7%</text>
+<rect x="68" y="148" width="200" height="22" fill="#e8f5ec" rx="5" opacity="0.4"/>
+<rect x="68" y="148" width="174.2" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="62" y="163" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G27</text>
+<text x="273" y="163" font-size="11" font-weight="600" fill="#4a5568">76.3%</text>
+<rect x="68" y="176" width="200" height="22" fill="#e8f5ec" rx="5" opacity="0.4"/>
+<rect x="68" y="176" width="168.2" height="22" fill="#2d8a4e" rx="5" opacity="0.82"/>
+<text x="62" y="191" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G70</text>
+<text x="273" y="191" font-size="11" font-weight="600" fill="#4a5568">73.7%</text>
+<rect x="68" y="204" width="200" height="22" fill="#fdecea" rx="5" opacity="0.4"/>
+<rect x="68" y="204" width="126.5" height="22" fill="#c0392b" rx="5" opacity="0.82"/>
+<text x="62" y="219" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">Guaz_4</text>
+<text x="273" y="219" font-size="11" font-weight="600" fill="#4a5568">55.4%</text>
+<rect x="68" y="232" width="200" height="22" fill="#fdecea" rx="5" opacity="0.4"/>
+<rect x="68" y="232" width="102.5" height="22" fill="#c0392b" rx="5" opacity="0.82"/>
+<text x="62" y="247" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">NuOpal</text>
+<text x="273" y="247" font-size="11" font-weight="600" fill="#4a5568">44.9%</text>
+<rect x="68" y="260" width="200" height="22" fill="#fdecea" rx="5" opacity="0.4"/>
+<rect x="68" y="260" width="98.4" height="22" fill="#c0392b" rx="5" opacity="0.82"/>
+<text x="62" y="275" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">DP_1238</text>
+<text x="273" y="275" font-size="11" font-weight="600" fill="#4a5568">43.1%</text>
+</svg></div>
+      <div class="chart-legend" style="margin-top:12px;">
+        <div class="legend-item"><div class="legend-dot" style="background:#2d8a4e"></div>Línea avanzada</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#c0392b"></div>Testigo</div>
+      </div>
+    </div>
+    <div class="card">
+      <h4 style="font-weight:700;color:var(--verde);margin-bottom:16px;">Partición de materia seca (g/planta)</h4>
+      <div id="chart-stack"><svg xmlns="http://www.w3.org/2000/svg" width="320" height="336" viewBox="0 0 320 336" font-family="'DM Sans',sans-serif">
+<rect width="320" height="336" fill="#fff" rx="8"/>
+<text x="62" y="25" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G50</text>
+<rect x="68.0" y="8" width="1.7" height="22" fill="#e8735a" opacity="0.88"/>
+<rect x="69.7" y="8" width="5.9" height="22" fill="#9ecae1" opacity="0.88"/>
+<rect x="75.6" y="8" width="9.2" height="22" fill="#6ab187" opacity="0.88"/>
+<rect x="84.8" y="8" width="15.9" height="22" fill="#f5c842" opacity="0.88"/>
+<rect x="100.7" y="8" width="44.3" height="22" fill="#2d8a4e" opacity="0.88"/>
+<text x="148.0" y="25" font-size="10.5" fill="#555">102g</text>
+<text x="62" y="53" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G20</text>
+<rect x="68.0" y="36" width="5.1" height="22" fill="#e8735a" opacity="0.88"/>
+<rect x="73.1" y="36" width="3.6" height="22" fill="#9ecae1" opacity="0.88"/>
+<rect x="76.7" y="36" width="10.3" height="22" fill="#6ab187" opacity="0.88"/>
+<rect x="87.0" y="36" width="17.5" height="22" fill="#f5c842" opacity="0.88"/>
+<rect x="104.5" y="36" width="43.2" height="22" fill="#2d8a4e" opacity="0.88"/>
+<text x="150.7" y="53" font-size="10.5" fill="#555">106g</text>
+<text x="62" y="81" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G16</text>
+<rect x="68.0" y="64" width="5.4" height="22" fill="#e8735a" opacity="0.88"/>
+<rect x="73.4" y="64" width="6.5" height="22" fill="#9ecae1" opacity="0.88"/>
+<rect x="79.9" y="64" width="9.7" height="22" fill="#6ab187" opacity="0.88"/>
+<rect x="89.6" y="64" width="16.2" height="22" fill="#f5c842" opacity="0.88"/>
+<rect x="105.8" y="64" width="44.9" height="22" fill="#2d8a4e" opacity="0.88"/>
+<text x="153.7" y="81" font-size="10.5" fill="#555">110g</text>
+<text x="62" y="109" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G53</text>
+<rect x="68.0" y="92" width="5.6" height="22" fill="#e8735a" opacity="0.88"/>
+<rect x="73.6" y="92" width="2.5" height="22" fill="#9ecae1" opacity="0.88"/>
+<rect x="76.1" y="92" width="8.9" height="22" fill="#6ab187" opacity="0.88"/>
+<rect x="85.0" y="92" width="14.6" height="22" fill="#f5c842" opacity="0.88"/>
+<rect x="99.6" y="92" width="39.1" height="22" fill="#2d8a4e" opacity="0.88"/>
+<text x="141.7" y="109" font-size="10.5" fill="#555">94g</text>
+<text x="62" y="137" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G17</text>
+<rect x="68.0" y="120" width="6.3" height="22" fill="#e8735a" opacity="0.88"/>
+<rect x="74.3" y="120" width="6.6" height="22" fill="#9ecae1" opacity="0.88"/>
+<rect x="80.9" y="120" width="10.3" height="22" fill="#6ab187" opacity="0.88"/>
+<rect x="91.2" y="120" width="13.6" height="22" fill="#f5c842" opacity="0.88"/>
+<rect x="104.8" y="120" width="37.7" height="22" fill="#2d8a4e" opacity="0.88"/>
+<text x="145.5" y="137" font-size="10.5" fill="#555">99g</text>
+<text x="62" y="165" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G27</text>
+<rect x="68.0" y="148" width="7.1" height="22" fill="#e8735a" opacity="0.88"/>
+<rect x="75.1" y="148" width="3.5" height="22" fill="#9ecae1" opacity="0.88"/>
+<rect x="78.6" y="148" width="9.4" height="22" fill="#6ab187" opacity="0.88"/>
+<rect x="88.0" y="148" width="14.4" height="22" fill="#f5c842" opacity="0.88"/>
+<rect x="102.4" y="148" width="35.3" height="22" fill="#2d8a4e" opacity="0.88"/>
+<text x="140.7" y="165" font-size="10.5" fill="#555">92g</text>
+<text x="62" y="193" font-size="12" font-weight="600" fill="#2d8a4e" text-anchor="end">G70</text>
+<rect x="68.0" y="176" width="7.3" height="22" fill="#e8735a" opacity="0.88"/>
+<rect x="75.3" y="176" width="6.6" height="22" fill="#9ecae1" opacity="0.88"/>
+<rect x="81.9" y="176" width="10.9" height="22" fill="#6ab187" opacity="0.88"/>
+<rect x="92.8" y="176" width="12.4" height="22" fill="#f5c842" opacity="0.88"/>
+<rect x="105.2" y="176" width="31.8" height="22" fill="#2d8a4e" opacity="0.88"/>
+<text x="140.0" y="193" font-size="10.5" fill="#555">92g</text>
+<text x="62" y="221" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">Guaz_4</text>
+<rect x="68.0" y="204" width="37.4" height="22" fill="#e8735a" opacity="0.88"/>
+<rect x="105.4" y="204" width="11.1" height="22" fill="#9ecae1" opacity="0.88"/>
+<rect x="116.5" y="204" width="20.4" height="22" fill="#6ab187" opacity="0.88"/>
+<rect x="136.9" y="204" width="13.0" height="22" fill="#f5c842" opacity="0.88"/>
+<rect x="149.9" y="204" width="47.6" height="22" fill="#2d8a4e" opacity="0.88"/>
+<text x="200.5" y="221" font-size="10.5" fill="#555">172g</text>
+<text x="62" y="249" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">DP_1238</text>
+<rect x="68.0" y="232" width="46.8" height="22" fill="#e8735a" opacity="0.88"/>
+<rect x="114.8" y="232" width="10.2" height="22" fill="#9ecae1" opacity="0.88"/>
+<rect x="125.0" y="232" width="26.6" height="22" fill="#6ab187" opacity="0.88"/>
+<rect x="151.6" y="232" width="11.2" height="22" fill="#f5c842" opacity="0.88"/>
+<rect x="162.8" y="232" width="34.2" height="22" fill="#2d8a4e" opacity="0.88"/>
+<text x="200.0" y="249" font-size="10.5" fill="#555">171g</text>
+<text x="62" y="277" font-size="12" font-weight="600" fill="#c0392b" text-anchor="end">NuOpal</text>
+<rect x="68.0" y="260" width="74.0" height="22" fill="#e8735a" opacity="0.88"/>
+<rect x="142.0" y="260" width="22.5" height="22" fill="#9ecae1" opacity="0.88"/>
+<rect x="164.5" y="260" width="36.2" height="22" fill="#6ab187" opacity="0.88"/>
+<rect x="200.7" y="260" width="15.9" height="22" fill="#f5c842" opacity="0.88"/>
+<rect x="216.6" y="260" width="51.4" height="22" fill="#2d8a4e" opacity="0.88"/>
+<text x="271.0" y="277" font-size="10.5" fill="#555">265g</text>
+<rect x="68" y="288" width="11" height="11" fill="#e8735a" rx="2"/>
+<text x="81" y="297" font-size="10" fill="#555">R.Veg</text>
+<rect x="128" y="288" width="11" height="11" fill="#9ecae1" rx="2"/>
+<text x="141" y="297" font-size="10" fill="#555">R.Reprod</text>
+<rect x="196" y="288" width="11" height="11" fill="#6ab187" rx="2"/>
+<text x="209" y="297" font-size="10" fill="#555">Tallo</text>
+<rect x="68" y="308" width="11" height="11" fill="#f5c842" rx="2"/>
+<text x="81" y="317" font-size="10" fill="#555">Carpelos</text>
+<rect x="148" y="308" width="11" height="11" fill="#2d8a4e" rx="2"/>
+<text x="161" y="317" font-size="10" fill="#555">Fibra+semilla</text>
+</svg></div>
+      <div class="chart-legend" style="margin-top:12px; flex-wrap:wrap; gap:8px;">
+        <div class="legend-item"><div class="legend-dot" style="background:#e8735a"></div>R. vegetativas</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#9ecae1"></div>R. reproductivas</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#6ab187"></div>Tallo</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#f5c842"></div>Carpelos</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#2d8a4e"></div>Fibra+semilla</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- VENTAJAS -->
+<section id="ventajas">
+  <h2 class="section-title">Ventajas &amp; Consideraciones</h2>
+  <p class="section-sub">Atributos agronómicos y morfológicos diferenciadores</p>
+  <div class="section-divider"></div>
+  <div class="adv-grid">
+    <div class="adv-card fade-up delay-1">
+      <div class="adv-icon">🌱</div>
+      <div class="adv-title">Estructura compacta</div>
+      <div class="adv-body">Sin ramas vegetativas, la planta canaliza toda su energía hacia la producción de bochas. Ideal para sistemas de cosecha <strong>stripper</strong> y menor uso de reguladores de crecimiento.</div>
+    </div>
+    <div class="adv-card fade-up delay-2">
+      <div class="adv-icon">🏆</div>
+      <div class="adv-title">Mayor partición reproductiva</div>
+      <div class="adv-body">Hasta <strong>86%</strong> de la biomasa total dirigida a estructuras reproductivas, frente al 43–57% de los testigos comerciales. Más bochas por planta, más fibra por gramo de biomasa.</div>
+    </div>
+    <div class="adv-card fade-up delay-3">
+      <div class="adv-icon">⏩</div>
+      <div class="adv-title">Ciclo más corto</div>
+      <div class="adv-body">Cut Out hasta <strong>5 días antes</strong> y primer bocha abierta hasta <strong>10 días antes</strong> que los testigos. Reduce el período de riesgo climático y mejora la oportunidad de cosecha.</div>
+    </div>
+    <div class="adv-card fade-up delay-1">
+      <div class="adv-icon">🧵</div>
+      <div class="adv-title">Calidad de fibra óptima</div>
+      <div class="adv-body">Micronaire en rango ideal (3.7–4.6), longitud competitiva y resistencia adecuada para los estándares de la industria textil. G20 con mayor longitud (28.1 mm).</div>
+    </div>
+    <div class="adv-card fade-up delay-2">
+      <div class="adv-icon">📊</div>
+      <div class="adv-title">Rendimiento superior</div>
+      <div class="adv-body">G53 lidera con <strong>1.919 Kg/ha bruto</strong> y <strong>732 Kg/ha de fibra</strong>. Con ciclos más cortos logran igual o superior rendimiento que los testigos, maximizando la eficiencia por día de cultivo.</div>
+    </div>
+    <div class="adv-card fade-up delay-3">
+      <div class="adv-icon">💧</div>
+      <div class="adv-title">Eficiencia hídrica</div>
+      <div class="adv-body">El período crítico más acotado implica menor demanda hídrica total. Esto reduce la exposición a déficit hídrico y mejora la estabilidad del rendimiento en condiciones de estrés.</div>
+    </div>
+    <div class="adv-card warn fade-up delay-1">
+      <div class="adv-icon">⚠️</div>
+      <div class="adv-title">A evaluar: bajo stand</div>
+      <div class="adv-body">Con bajo stand de plantas, la estructura compacta no permite compensar con crecimiento vegetativo como lo hacen los testigos, lo que puede reducir la cobertura del surco.</div>
+    </div>
+    <div class="adv-card warn fade-up delay-2">
+      <div class="adv-icon">⚠️</div>
+      <div class="adv-title">A evaluar: período crítico</div>
+      <div class="adv-body">Los ciclos más cortos concentran el período crítico en una ventana más acotada, lo que puede aumentar el riesgo ante estreses puntuales de temperatura o agua.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p style="margin-bottom:6px;"><strong>INTA Reconquista</strong> · Programa de Mejoramiento de Algodón</p>
+  <p>Promedio 3 Campañas 2023/24 – 2025/26 · Localización: INTA Reconquista</p>
+  <p style="margin-top:8px;font-size:11px;opacity:0.6;">Documento interno de difusión técnica. Los datos son promedios experimentales de ensayos en bloques completos al azar.</p>
+</footer>
+
+<script>
+// ── DATA ──────────────────────────────────────────────────────────────────────
+const dataRto = [
+  {gen:"G53",grupo:"linea",rto_bruto:1919,rto_fibra:732},
+  {gen:"G17",grupo:"linea",rto_bruto:1771,rto_fibra:701},
+  {gen:"G16",grupo:"linea",rto_bruto:1763,rto_fibra:685},
+  {gen:"G27",grupo:"linea",rto_bruto:1753,rto_fibra:682},
+  {gen:"G50",grupo:"linea",rto_bruto:1690,rto_fibra:650},
+  {gen:"G20",grupo:"linea",rto_bruto:1650,rto_fibra:646},
+  {gen:"G70",grupo:"linea",rto_bruto:1624,rto_fibra:643},
+  {gen:"Porá_3",grupo:"testigo",rto_bruto:1810,rto_fibra:716},
+  {gen:"NuOpal",grupo:"testigo",rto_bruto:1734,rto_fibra:641},
+  {gen:"Guaz_4",grupo:"testigo",rto_bruto:1558,rto_fibra:583},
+  {gen:"DP_1238",grupo:"testigo",rto_bruto:1527,rto_fibra:572},
+];
+const dataHVI = [
+  {gen:"G20",grupo:"linea",mic:3.97,longitud:28.1,resistencia:29.7,uniformidad:81.5},
+  {gen:"G53",grupo:"linea",mic:4.35,longitud:27.5,resistencia:31.2,uniformidad:81.6},
+  {gen:"G17",grupo:"linea",mic:4.26,longitud:27.8,resistencia:30.8,uniformidad:81.8},
+  {gen:"G16",grupo:"linea",mic:4.25,longitud:27.8,resistencia:30.6,uniformidad:80.9},
+  {gen:"G27",grupo:"linea",mic:4.25,longitud:27.7,resistencia:30.3,uniformidad:81.6},
+  {gen:"G50",grupo:"linea",mic:4.10,longitud:27.9,resistencia:29.8,uniformidad:81.3},
+  {gen:"G70",grupo:"linea",mic:4.18,longitud:27.6,resistencia:28.9,uniformidad:81.5},
+  {gen:"NuOpal",grupo:"testigo",mic:4.10,longitud:27.8,resistencia:31.4,uniformidad:81.8},
+  {gen:"Guaz_4",grupo:"testigo",mic:4.11,longitud:27.2,resistencia:29.6,uniformidad:81.2},
+  {gen:"DP_1238",grupo:"testigo",mic:4.11,longitud:27.9,resistencia:31.5,uniformidad:81.8},
+  {gen:"Porá_3",grupo:"testigo",mic:4.26,longitud:26.6,resistencia:30.3,uniformidad:81.9},
+];
+const dataPS = [
+  {gen:"G50",grupo:"linea",prop_reprod:85.9,r_veg:2.2,tallo:12.2,carpelos:21.1,fibra:58.8},
+  {gen:"G16",grupo:"linea",prop_reprod:81.7,r_veg:7.2,tallo:12.9,carpelos:21.5,fibra:59.6},
+  {gen:"G20",grupo:"linea",prop_reprod:80.7,r_veg:6.7,tallo:13.7,carpelos:23.2,fibra:57.3},
+  {gen:"G53",grupo:"linea",prop_reprod:79.5,r_veg:7.4,tallo:11.8,carpelos:19.3,fibra:51.9},
+  {gen:"G17",grupo:"linea",prop_reprod:77.7,r_veg:8.3,tallo:13.7,carpelos:18.0,fibra:50.0},
+  {gen:"G27",grupo:"linea",prop_reprod:76.3,r_veg:9.4,tallo:12.5,carpelos:19.1,fibra:46.8},
+  {gen:"G70",grupo:"linea",prop_reprod:73.7,r_veg:9.7,tallo:14.4,carpelos:16.5,fibra:42.2},
+
+  {gen:"Guaz_4",grupo:"testigo",prop_reprod:55.4,r_veg:49.6,tallo:27.0,carpelos:17.3,fibra:63.1},
+  {gen:"NuOpal",grupo:"testigo",prop_reprod:44.9,r_veg:98.1,tallo:48.0,carpelos:21.1,fibra:68.1},
+  {gen:"DP_1238",grupo:"testigo",prop_reprod:43.1,r_veg:62.0,tallo:35.3,carpelos:14.9,fibra:45.3},
+];
+const dataFen = [
+  {gen:"G16",grupo:"linea",flor:"27-Ene",cutout:"10-Feb",bocha:"18-Mar",dias:14},
+  {gen:"G17",grupo:"linea",flor:"28-Ene",cutout:"11-Feb",bocha:"18-Mar",dias:14},
+  {gen:"G20",grupo:"linea",flor:"29-Ene",cutout:"11-Feb",bocha:"18-Mar",dias:13},
+  {gen:"G27",grupo:"linea",flor:"29-Ene",cutout:"11-Feb",bocha:"18-Mar",dias:13},
+  {gen:"G50",grupo:"linea",flor:"29-Ene",cutout:"11-Feb",bocha:"18-Mar",dias:13},
+  {gen:"G53",grupo:"linea",flor:"29-Ene",cutout:"11-Feb",bocha:"20-Mar",dias:13},
+  {gen:"G70",grupo:"linea",flor:"30-Ene",cutout:"11-Feb",bocha:"18-Mar",dias:12},
+  {gen:"Porá 3",grupo:"testigo",flor:"31-Ene",cutout:"15-Feb",bocha:"24-Mar",dias:15},
+  {gen:"Guaz. 4",grupo:"testigo",flor:"31-Ene",cutout:"15-Feb",bocha:"24-Mar",dias:15},
+  {gen:"NuOpal",grupo:"testigo",flor:"2-Feb",cutout:"17-Feb",bocha:"26-Mar",dias:15},
+  {gen:"DP 1238",grupo:"testigo",flor:"3-Feb",cutout:"18-Feb",bocha:"28-Mar",dias:15},
+  {gen:"Garaní",grupo:"testigo",flor:"28-Ene",cutout:"11-Feb",bocha:"18-Mar",dias:14},
+  {gen:"Guaz. 2000",grupo:"testigo",flor:"31-Ene",cutout:"15-Feb",bocha:"25-Mar",dias:15},
+];
+
+// ── HELPER: render horizontal bar chart ──────────────────────────────────────
+// ── TAB RENDIMIENTO ──────────────────────────────────────────────────────────
+function showRtoTab(which, btn) {
+  document.querySelectorAll('.rto-panel').forEach(function(p) { p.style.display = 'none'; });
+  document.getElementById('rto-panel-' + which).style.display = 'block';
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+}
+
+
+// ── Intersection Observer for fade-up ────────────────────────────────────────
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.style.opacity = 1; });
+}, {threshold:0.1});
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
