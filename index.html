@@ -49,7 +49,44 @@ nav a {
 }
 nav a:hover { background: rgba(255,255,255,0.15); color:#fff; }
 .nav-links { display:flex; gap:4px; flex-wrap: wrap; }
-@media(max-width:600px) { .nav-links { display:none; } }
+/* nav-links mobile handled below */
+/* ── HAMBURGUESA ── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  background: none;
+  border: none;
+  flex-shrink: 0;
+}
+.hamburger span {
+  display: block; width: 22px; height: 2px;
+  background: white; border-radius: 2px;
+  transition: all 0.3s;
+  flex: none;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+@media(max-width:600px) {
+  .hamburger { display: flex; }
+  .nav-links {
+    display: none;
+    position: absolute; top: 58px; left: 0; right: 0;
+    background: var(--verde);
+    flex-direction: column;
+    padding: 10px 16px 16px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+    z-index: 99;
+    gap: 2px;
+  }
+  .nav-links.open { display: flex; }
+  .nav-links a { padding: 10px 12px; font-size: 14px; border-radius: 8px; }
+}
+
 
 /* ── HERO ── */
 .hero {
@@ -212,7 +249,7 @@ section { padding: 56px 20px; max-width: 1100px; margin: 0 auto; }
   box-shadow: var(--sombra);
   position:relative;
 }
-.photo-card img { width:100%; display:block; object-fit:cover; height:950px; }
+.photo-card img { width:100%; display:block; object-fit:cover; max-height:600px; }
 .photo-caption {
   position:absolute; bottom:0; left:0; right:0;
   background: linear-gradient(transparent, rgba(0,0,0,0.75));
@@ -455,7 +492,10 @@ footer strong { color: var(--oro); }
   <image href="img/icon/icon-192x192.png" x="3" y="3" width="32" height="32"/>
 </svg>
   <span>INTA Reconquista · Mejoramiento de Algodón</span>
-  <div class="nav-links">
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-links" id="nav-links">
     <a href="#rendimiento">Rendimiento</a>
     <a href="#componentes">Componentes</a>
     <a href="#calidad">Calidad</a>
@@ -1693,6 +1733,20 @@ function showRtoTab(which, btn) {
   btn.classList.add('active');
 }
 
+
+
+// ── MENÚ HAMBURGUESA ─────────────────────────────────────────────────────────
+function toggleMenu() {
+  document.getElementById('nav-links').classList.toggle('open');
+  document.getElementById('hamburger').classList.toggle('open');
+}
+// Cerrar menú al hacer click en un link
+document.querySelectorAll('.nav-links a').forEach(function(a) {
+  a.addEventListener('click', function() {
+    document.getElementById('nav-links').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('open');
+  });
+});
 
 // ── Intersection Observer for fade-up ────────────────────────────────────────
 const observer = new IntersectionObserver(entries => {
